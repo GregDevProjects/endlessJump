@@ -1,0 +1,10 @@
+TODO:
+- find a way to organize code going forward 
+- learn how to run on mobile device
+	- build to mobile 
+	- use mobile touch inputs 
+
+- algorithm for endlessly falling platforms 
+	- how to scale difficulty 
+	- powerups? 
+	
