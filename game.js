@@ -2,7 +2,11 @@
 
 function setPhysics(){
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-	
-	//game.physics.arcade.gravity.y = 100;
-	// game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+}
+
+function setBounds(){
+	var gameHeight = 1000;
+	game.world.setBounds(0, 0 - gameHeight, game.world.bounds.width, game.world.bounds.height + gameHeight);
+	//might move this
+	game.camera.follow(player.player);
 }

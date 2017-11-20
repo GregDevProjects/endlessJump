@@ -3,22 +3,25 @@ function initPlatforms(){
     platforms = game.add.group();
     //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
-   // platforms.allowGravity = false;
-    //var ground = platforms.create(0, game.world.height - 64, 'ground');
-    //ground.body.immovable = true;
-    //ground.body.allowGravity = false
 
-    ledge = platforms.create(game.world.centerX, game.world.centerY + 100, 'platform');
-
-    ledge.body.immovable = true;
-    // debugger;
-    //ledge = platforms.create(-150, 250, 'platform');
-    ledge.body.allowGravity = true;
-    ledge.body.gravity.y = 5;
-
+    for(var i =1;i<10;i++){
+        var x = i%2==0?-50:50;
+        var y = -100*i;
+        //debugger;
+        createLedge(game.world.centerX + x, game.world.bounds.height+ y);     
+    }
 
     initGround();
 
+}
+
+function createLedge(x,y){
+    var ledge = platforms.create(x,y, 'platform');
+    ledge.body.immovable = true;
+    // debugger;
+    //ledge = platforms.create(-150, 250, 'platform');
+    ledge.body.allowGravity = false;
+    ledge.body.gravity.y = 5;
 }
 
 function initGround(){

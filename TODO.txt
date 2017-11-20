@@ -1,10 +1,18 @@
 TODO:
 - find a way to organize code going forward 
+	- use functions as classes for encapulation 
+	- 1 file per class
+	- avoid globals
 - learn how to run on mobile device
 	- build to mobile 
 	- use mobile touch inputs 
+	- https://software.intel.com/en-us/articles/how-to-make-a-mobile-virtual-pet-game-with-html5-and-cordova
 
-- algorithm for endlessly falling platforms 
-	- how to scale difficulty 
-	- powerups? 
+- work out gameplay 
+	- dude with jetpack flying upp
+		- collect fuel for a boost
+			-overlap with fuel rather than collide?
+		- challenges:
+			- can have tunnels + enemies 
+		-perspective shifts to the side sometimes 
 	
