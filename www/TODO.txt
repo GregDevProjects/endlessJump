@@ -4,9 +4,8 @@ TODO:
 	- 1 file per class
 	- avoid globals
 - learn how to run on mobile device
-	- build to mobile 
-	- use mobile touch inputs 
 	- https://software.intel.com/en-us/articles/how-to-make-a-mobile-virtual-pet-game-with-html5-and-cordova
+	- work out touch rules with active pointer 
 
 - work out gameplay 
 	- dude with jetpack flying upp

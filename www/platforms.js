@@ -8,7 +8,7 @@ function initPlatforms(){
         var x = i%2==0?-50:50;
         var y = -100*i;
         //debugger;
-        createLedge(game.world.centerX + x, game.world.bounds.height+ y);     
+        createLedge(game.world.centerX + x, game.world.bounds.height+ y - 20);     
     }
 
     initGround();

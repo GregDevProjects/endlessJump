@@ -14,12 +14,12 @@ function Player() {
 
         if (cursors.left.isDown) {
             //  Move to the left
-            this.player.body.velocity.x = -150;
+             this.moveLeft();
 
             //player.animations.play('left');
         } else if (cursors.right.isDown) {
             //  Move to the right
-            this.player.body.velocity.x = 150;
+            this.moveRight();
 
             //player.animations.play('right');
         } else {
@@ -32,6 +32,18 @@ function Player() {
         if (cursors.up.isDown && this.player.body.touching.down) {
             this.player.body.velocity.y = -350;
         }
+    }
+
+    this.moveRight = function(){
+        this.player.body.velocity.x = 150;
+    }
+
+    this.moveLeft = function(){
+        this.player.body.velocity.x = -150;
+    }
+
+    this.stop = function(){
+        this.player.body.velocity.x = 0;
     }
     return this;
 }
