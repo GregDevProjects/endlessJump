@@ -32,5 +32,5 @@ function onPlatformCollision(){
 }
 
 function onGroundCollision(){
-    console.log('you ded');
+  //  console.log('you ded');
 }

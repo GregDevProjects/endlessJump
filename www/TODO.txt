@@ -5,7 +5,6 @@ TODO:
 	- avoid globals
 - learn how to run on mobile device
 	- https://software.intel.com/en-us/articles/how-to-make-a-mobile-virtual-pet-game-with-html5-and-cordova
-	- work out touch rules with active pointer 
 
 - work out gameplay 
 	- dude with jetpack flying upp
@@ -14,4 +13,12 @@ TODO:
 		- challenges:
 			- can have tunnels + enemies 
 		-perspective shifts to the side sometimes 
+		-start on ground level 
+			-gravity is high 
+			-fuel is shorter apart
+			-rotate camera on entry to space
+		-go to space 
+			-gravity is low 
+			-fuel is longer apart 
+		-try playing the game sideways 
 	

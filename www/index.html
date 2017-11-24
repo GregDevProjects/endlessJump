@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Jetman</title>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!-- // <script type="text/javascript" src="cordova.js"></script> -->
         <script src="phaser/phaser.js"></script>
 
         <!--<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>-->
@@ -53,16 +53,41 @@
             initPlatforms();
             player = new Player();
             setBounds();
-            game.input.addPointer();
+             game.input.onUp.add(onUp, this);
+             game.input.onHold.add(onHold, this);
+             //game.input.onDown.add(onDown, this);
+             game.input.onUp.add(onUp, this);
+           // game.input.addPointer();
         }
 
         function update() {
             game.physics.arcade.collide(player.player, ground, onGroundCollision, null, this);
             game.physics.arcade.overlap(player.player, platforms, onPlatformCollision, null, this);
-
+            game.input.onHold.add(onDown, this);
            // player.handleControlls();
-            game.input.onDown.add(onDown, this);
-            game.input.onUp.add(onUp, this);
+           // if(game.input.pointer1.isDown){
+           //      console.log('down');
+           //      onDown(game.input.pointer1);
+           // }
+
+           // if(game.input.pointer1.isUp){
+           //      onUp(game.input.pointer1);
+           // } 
+
+         //  game.input.onDown.add(onDown, this);
+
+            // if(game.input.pointer1.isDown){
+            //      onUp('pointer')
+            // }
+            // else{
+                
+            // }
+            
+             if (game.input.activePointer.isDown) {
+                  onHold(game.input.activePointer);
+             }
+
+           // game.input.pointer1.isUp.add(onUp, this);
         }
 
         function render() {
@@ -74,19 +99,44 @@
         }
 
         function onDown(pointer) {
-            var xPosition = pointer.x;
+
+            dragStyleMove(pointer.x, player.player.x);
+           // console.log(pointer.x)
+        }
+
+        function onHold(pointer){
+            dragStyleMove(pointer.x, player.player.x);
+        }
+
+        function onUp(pointer){
+            player.stop();
+        }
+
+        function dragStyleMove(tapPositionX, playerPositionX){
+            var playerMiddle = playerPositionX + player.player.width/2;
+
+            //console.log(tapPositionX, playerMiddle );
+            if (playerMiddle - 5 <= tapPositionX && playerMiddle + 5 >= tapPositionX){
+                player.stop();
+                return;
+            }
+
+            if (tapPositionX >  playerMiddle) {
+                player.moveRight();    
+            } else if (tapPositionX < playerMiddle){
+                player.moveLeft();
+            } 
+
+        }
+
+        function buttonStyleMove(xPosition){
             if(xPosition > width/2){
                 console.log('right');
                 player.moveRight();
             } else {
                 player.moveLeft();
                 console.log('left');
-            }
-            console.log(pointer.x)
-        }
-
-        function onUp(pointer){
-            player.stop();
+            }  
         }
 
     };

@@ -39,7 +39,7 @@ function Player() {
     }
 
     this.moveLeft = function(){
-        this.player.body.velocity.x = -150;
+        this.player.body.velocity.x = -150; 
     }
 
     this.stop = function(){
