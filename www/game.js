@@ -6,7 +6,22 @@ function setPhysics(){
 
 function setBounds(){
 	var gameHeight = 1000;
-	game.world.setBounds(0, 0 - gameHeight, game.world.bounds.width, game.world.bounds.height + gameHeight);
+	var gameWidth = 500;
+	game.world.setBounds(
+			0, //Top left most corner of the world.
+			gameHeight, //Top left most corner of the world.
+			gameWidth,  //New width of the game world in pixels
+			gameHeight //New height of the game world in pixels.
+		);
 	//might move this
-	game.camera.follow(player.player);
+	
+
+}
+
+function showBounds(){
+	var world = game.world.bounds;
+	var  bounds = new Phaser.Rectangle(world.x, world.y,world.width, world.height);
+	var graphics = game.add.graphics(bounds.x, bounds.y);
+    graphics.beginFill(0x9B4836);
+    graphics.drawRect(0, 0, bounds.width, bounds.height);
 }
