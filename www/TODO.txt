@@ -20,5 +20,9 @@ TODO:
 		-go to space 
 			-gravity is low 
 			-fuel is longer apart 
-		-try playing the game sideways 
 	
+
+LVL 1 - underground 
+- fuel pickups have different power 
+- stuff that can kill you:
+	- fire 

@@ -1,3 +1,10 @@
+var FUEL_POWER = {
+    small : 450,
+    med : 600,
+    high: 850
+}
+
+
 function initPlatforms(){
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -5,42 +12,46 @@ function initPlatforms(){
     platforms.enableBody = true;
 
 
-    waveLineFuel();
-    initGround();
-    groundFuel();
+    buildLevelOne();
 }
 
-function waveLineFuel(){
-        var gap = 50;
+function buildLevelOne(){
+    var wavePosition = waveLineFuel(game.world.bounds.bottom);
+    createFuel(wavePosition.x ,wavePosition.y - 200, FUEL_POWER.high); 
+    groundFuel(); 
+}
+
+
+function waveLineFuel(startY){
+    var gap = 50;
+    var lastBlockLocation = {};
     for(var i =1;i<10;i++){
         var x = i%2==0?-gap:gap;
         var y = -200*i;
         gap+=10;
-        //debugger;
-        createLedge(game.world.centerX + x, game.world.bounds.bottom+ y - 120);     
+        createFuel(
+                game.world.centerX + x, 
+                startY + y - 120,
+                FUEL_POWER.small
+            );     
+        lastBlockLocation.x = game.world.centerX + x;
+        lastBlockLocation.y = startY + y - 120;
     }
+    return lastBlockLocation;
 }
 
 function groundFuel(){
-    createLedge(200, game.world.bounds.bottom - 50);   
+    createFuel(200, game.world.bounds.bottom - 50, FUEL_POWER.small);   
 }
 
-function createLedge(x,y){
+function createFuel(x,y, force){
     var ledge = platforms.create(x,y, 'platform');
     ledge.body.immovable = true;
+    ledge.force = force;
 }
 
-function initGround(){
-	ground = game.add.tileSprite(0,game.world.bounds.height - 100,game.world.bounds.width,100, 'ground');
-	game.physics.arcade.enable(ground);
-	ground.enableBody = true;
-	ground.body.immovable = true;
+function onPlatformCollision(playerObj, platform){
+    platform.kill();
+    player.player.body.velocity.y = -platform.force;
 }
 
-function onPlatformCollision(){
-    player.player.body.velocity.y = -350;
-}
-
-function onGroundCollision(){
-  //  console.log('you ded');
-}

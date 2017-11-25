@@ -5,7 +5,7 @@ function setPhysics(){
 }
 
 function setBounds(){
-	var gameHeight = 1000;
+	var gameHeight = 4000;
 	var gameWidth = 500;
 	game.world.setBounds(
 			0, //Top left most corner of the world.
@@ -24,4 +24,8 @@ function showBounds(){
 	var graphics = game.add.graphics(bounds.x, bounds.y);
     graphics.beginFill(0x9B4836);
     graphics.drawRect(0, 0, bounds.width, bounds.height);
+}
+
+function cameraFollowPlayer(){
+	game.camera.follow(player.player);
 }
