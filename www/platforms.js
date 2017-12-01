@@ -11,6 +11,8 @@ function initPlatforms(){
     //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
 
+    fuel = game.add.group();
+    fuel.enableBody = true;
 
     buildLevelOne();
 }
@@ -19,6 +21,7 @@ function buildLevelOne(){
     var wavePosition = waveLineFuel(game.world.bounds.bottom);
     createFuel(wavePosition.x ,wavePosition.y - 200, FUEL_POWER.high); 
     groundFuel(); 
+    createPlatform(wavePosition.x ,wavePosition.y - 500);
 }
 
 
@@ -45,13 +48,24 @@ function groundFuel(){
 }
 
 function createFuel(x,y, force){
-    var ledge = platforms.create(x,y, 'platform');
+    var ledge = fuel.create(x,y, 'fuel');
     ledge.body.immovable = true;
     ledge.force = force;
 }
 
-function onPlatformCollision(playerObj, platform){
-    platform.kill();
-    player.player.body.velocity.y = -platform.force;
+function createPlatform(x,y){
+    var platform = platforms.create(x,y, 'platform');
+    platform.body.immovable = true;
 }
 
+function onFuelOverlap(playerObj, fuel){
+    console.log('overlap', fuel.index);
+    fuel.alpha = 0;
+  // fuel.kill();
+   // player.player.body.velocity.y = -fuel.force;
+}
+
+function onPlatformCollision(playerObj, platform){
+
+
+}

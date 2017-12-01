@@ -1,11 +1,13 @@
 function Player() {
 
     this.construct = function() {
-        this.player = game.add.sprite(game.world.centerX, game.world.centerY, 'player'); //initPlayer();
+      
+        this.player = game.add.sprite(0, 0, 'player'); //initPlayer();
         game.physics.arcade.enable(this.player);
         this.player.body.allowGravity = true;
         this.player.body.collideWorldBounds=true;
         this.player.body.gravity.y = 300;
+        
        
     }
     
