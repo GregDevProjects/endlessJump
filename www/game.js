@@ -1,31 +1,30 @@
 //world settings go here 
-
 function setPhysics(){
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 }
 
-function setBounds(){
-	var gameHeight = 4000;
-	var gameWidth = 500;
-	game.world.setBounds(
-			0, //Top left most corner of the world.
-			gameHeight, //Top left most corner of the world.
-			gameWidth,  //New width of the game world in pixels
-			gameHeight //New height of the game world in pixels.
-		);
-	//might move this
-	
-
-}
-
-function showBounds(){
-	var world = game.world.bounds;
-	var  bounds = new Phaser.Rectangle(world.x, world.y,world.width, world.height);
-	var graphics = game.add.graphics(bounds.x, bounds.y);
-    graphics.beginFill(0x9B4836);
-    graphics.drawRect(0, 0, bounds.width, bounds.height);
-}
-
 function cameraFollowPlayer(){
 	game.camera.follow(player.player);
+}
+
+// -add the gid property to the objects from the tilemap 
+// -add properties from the object type in tiled to the sprite
+//workaround as tiled doesn't do this 
+function addGidToObjects(){
+	var small = 400;
+	var med = 600;
+	var large = 900;
+	for (var i=0;i<map.objects.fuel.length;i++) {
+		map.objects.fuel[i].gid = 34;
+		map.objects.fuel[i].properties = {};
+		switch (map.objects.fuel[i].type) {
+			case "s" : 	map.objects.fuel[i].properties.velocity = small;
+				break;
+			case "m" : 	map.objects.fuel[i].properties.velocity = med;
+				break;
+			case "l" : 	map.objects.fuel[i].properties.velocity = large;
+				break;								
+		}
+	}
+
 }

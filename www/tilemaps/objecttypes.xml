@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="smallBoost" color="#ffff00">
+  <property name="velocity" type="int" default="100"/>
+ </objecttype>
+ <objecttype name="medBoost" color="#00ff00">
+  <property name="velocity" type="int" default="500"/>
+ </objecttype>
+ <objecttype name="highBoost" color="#aa0000">
+  <property name="velocity" type="int" default="1000"/>
+ </objecttype>
+</objecttypes>

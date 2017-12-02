@@ -23,9 +23,21 @@ TODO:
 	
 
 LVL 1 - underground 
-- fuel pickups have different power 
+- level goals 
+	-introduce player to gamplay elements 
+		- not too challenging 
+		- limited jumping
+- spikes 
+- lava
+- fireballs 
+
 - stuff that can kill you:
 	- fire 
+
+GLOBAL 
+- movements mechanics not solid 
+	- apply speady velocity for a limited time 
+	- direction depends on what angle the player is at 
 
 
 CODE STUFF 
@@ -33,11 +45,3 @@ CODE STUFF
 - tilemaps 
 	- http://www.html5gamedevs.com/topic/7102-how-to-use-tiled-map-editor-with-phaser/
 	- http://www.mapeditor.org/
-	- will need to rethink game according to tilemaps 
-		- handling collisions 
-		- use objects to map the sprites
-			- http://www.html5gamedevs.com/topic/8471-newbie-question-how-to-remove-a-tile-from-a-game/
-			- kind of working right now...
-				- gids need to update automatically 
-				- pass in custom params to objects
-
