@@ -14,7 +14,7 @@ function initPlatforms(){
     fuel = game.add.group();
     fuel.enableBody = true;
 
-    buildLevelOne();
+  //  buildLevelOne();
 }
 
 function buildLevelOne(){
@@ -59,10 +59,12 @@ function createPlatform(x,y){
 }
 
 function onFuelOverlap(playerObj, fuel){
-    console.log('overlap', fuel.index);
-    fuel.alpha = 0;
-  // fuel.kill();
-   // player.player.body.velocity.y = -fuel.force;
+  //   console.log('overlap', fuel.index);
+  //   fuel.index = -1;
+    fuel.force = 100;
+    console.log('sdf');
+     player.player.body.velocity.y = -fuel.velocity;
+//fuel.kill();
 }
 
 function onPlatformCollision(playerObj, platform){

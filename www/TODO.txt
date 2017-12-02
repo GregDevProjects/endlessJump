@@ -37,4 +37,7 @@ CODE STUFF
 		- handling collisions 
 		- use objects to map the sprites
 			- http://www.html5gamedevs.com/topic/8471-newbie-question-how-to-remove-a-tile-from-a-game/
+			- kind of working right now...
+				- gids need to update automatically 
+				- pass in custom params to objects
 
