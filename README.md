@@ -1,7 +1,7 @@
 # Jetman Game
 
-Phaser 2.6.2
-- https://phaser.io/docs/2.6.2/index
+Phaser CE v2.9.2 
+- https://phaser.io/
 
 Tiled
 - http://www.mapeditor.org/
