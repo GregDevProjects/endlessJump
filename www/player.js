@@ -2,7 +2,7 @@ function Player() {
 
     this.construct = function() {
       
-        this.player = game.add.sprite(0, 0, 'player'); //initPlayer();
+        this.player = game.add.sprite(0, 7950, 'player'); //initPlayer();
         game.physics.arcade.enable(this.player);
         this.player.body.allowGravity = true;
         this.player.body.collideWorldBounds=true;
