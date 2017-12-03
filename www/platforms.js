@@ -4,9 +4,16 @@ function initGroups(){
     platforms.enableBody = true;
     fuel = game.add.group();
     fuel.enableBody = true;
-}
+    fuelXl = game.add.group();
+    fuelXl.enableBody = true;
+  }
 
 function onFuelOverlap(playerObj, fuel){
+    
+
+    if(fuel.key === 'fuelXl'){
+      player.player.body.allowGravity = false;
+    } 
     player.player.body.velocity.y = -fuel.velocity;
    // fuel.kill();
 }
@@ -14,4 +21,14 @@ function onFuelOverlap(playerObj, fuel){
 function onPlatformCollision(playerObj, platform){
 
 
+}
+
+function onDeathLayerCollide(playerObj, killObject){
+  //playerObj.kill();
+  console.log('hit');
+  //debugger;
+  // game.camera.flash(0xff0000, 500);
+  // player.player.kill();
+  // initPlayer();
+  player.respawnAfterDeath();
 }

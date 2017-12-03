@@ -2,7 +2,8 @@ var game;
 var player;
 var input;
 var map;
-var layer; 
+//tile layer of platforms 
+var platforms; 
 
 window.onload = function() {
 
@@ -20,6 +21,8 @@ window.onload = function() {
         game.load.image('fuelLow', 'img/low.png');
         game.load.image('fuelMed', 'img/med.png');
         game.load.image('fuelHigh', 'img/high.png');
+        game.load.image('lava', 'img/lava.png');
+        game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
         game.load.tilemap('mapName', 'tilemaps/test.json', null, Phaser.Tilemap.TILED_JSON);
     }
 
@@ -33,14 +36,20 @@ window.onload = function() {
       initGroups();
       initTileMap();
       tileObjectsToSprites();
-      player = new Player();
-      cameraFollowPlayer();  
+  
     }
 
     function update() {
-      game.physics.arcade.collide(player.player, layer);
+      game.physics.arcade.collide(player.player, platforms);
       game.physics.arcade.overlap(player.player, fuel, onFuelOverlap, null, this);
       input.dragControl();
+      if(player.player.alive === false){
+        //debugger;
+       // initPlayer();
+        player.construct();
+        setTimeout(function(){ cameraFollowPlayer(); }, 1000);
+        
+      }
     }
 
 

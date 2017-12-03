@@ -11,9 +11,11 @@ function cameraFollowPlayer(){
 // -add properties from the object type in tiled to the sprite
 //workaround for now, would be better to set this in tiled 
 function addGidToObjects(){
+	//make these constants 
 	var small = 400;
 	var med = 600;
 	var large = 900;
+	var xl = 400;
 	for (var i=0;i<map.objects.fuel.length;i++) {
 		//map.objects.fuel[i].height = 25;
 		//map.objects.fuel[i].width = 50;
@@ -30,7 +32,10 @@ function addGidToObjects(){
 			case "l" : 	
 				map.objects.fuel[i].properties.velocity = large;
 				map.objects.fuel[i].gid = 3;
-				break;								
+				break;
+			case "xl":
+				map.objects.fuel[i].properties.velocity = xl;
+				map.objects.fuel[i].gid = 4;											
 		}
 	}
 
@@ -40,13 +45,29 @@ function initTileMap(){
  	map = game.add.tilemap('mapName');    
 	addGidToObjects(); 
 	map.addTilesetImage('fuel', 'platform');    
-	layer = map.createLayer('Tile Layer 1');    
+	map.addTilesetImage('lava', 'lava');    
+	platforms = map.createLayer('platforms');    
+	map.setTileIndexCallback(2, onDeathLayerCollide, this);
 	map.setCollision(1);
-	layer.resizeWorld();
+	platforms.resizeWorld();
 }
 
 function tileObjectsToSprites(){
 	map.createFromObjects('fuel', 1,'fuelLow',0,true,false,fuel, Phaser.Sprite, false, false);
 	map.createFromObjects('fuel', 2,'fuelMed',0,true,false,fuel, Phaser.Sprite, false, false);
 	map.createFromObjects('fuel', 3,'fuelHigh',0,true,false,fuel, Phaser.Sprite, false, false);
+	map.createFromObjects('fuel', 4,'fuelXl',0,true,false,fuel, Phaser.Sprite, false, false);
+
+	//instead of callAll it might be better to only animate xl fuels
+	fuel.callAll('animations.add', 'animations', 'glow', [0, 1,2,3], 10, true);
+    fuel.callAll('animations.play', 'animations', 'glow');
+
+	initPlayer();
+}
+
+//spawns new player at the playerStart object from the tilesheet
+function initPlayer(){
+	//delete player;
+	player = new Player();
+    cameraFollowPlayer();
 }

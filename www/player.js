@@ -1,8 +1,9 @@
 function Player() {
 
     this.construct = function() {
-      
-        this.player = game.add.sprite(0, 7950, 'player'); //initPlayer();
+        var x = map.objects.playerStart[0].x; 
+        var y =map.objects.playerStart[0].y;
+        this.player = game.add.sprite(x, y, 'player'); //initPlayer();
         game.physics.arcade.enable(this.player);
         this.player.body.allowGravity = true;
         this.player.body.collideWorldBounds=true;
@@ -13,6 +14,16 @@ function Player() {
     
     this.construct();
 
+    this.respawnAfterDeath = function(){
+      //  game.camera.unfollow(this.player)
+
+        game.camera.flash(0xff0000, 500);
+        this.player.kill();
+
+        //probably need to wait for the update loop before camera follows again
+      //  cameraFollowPlayer();
+
+    }
 
     this.moveRight = function(){
         this.player.body.velocity.x = 150;
