@@ -15,8 +15,8 @@ function addGidToObjects(){
 	var med = 600;
 	var large = 900;
 	for (var i=0;i<map.objects.fuel.length;i++) {
-		map.objects.fuel[i].height = 25;
-		map.objects.fuel[i].width = 50;
+		//map.objects.fuel[i].height = 25;
+		//map.objects.fuel[i].width = 50;
 		map.objects.fuel[i].properties = {};
 		switch (map.objects.fuel[i].type) {
 			case "s" : 	
@@ -46,7 +46,7 @@ function initTileMap(){
 }
 
 function tileObjectsToSprites(){
-	map.createFromObjects('fuel', 1,'fuelLow',0,true,false,fuel, Phaser.Sprite, false, true);
+	map.createFromObjects('fuel', 1,'fuelLow',0,true,false,fuel, Phaser.Sprite, false, false);
 	map.createFromObjects('fuel', 2,'fuelMed',0,true,false,fuel, Phaser.Sprite, false, false);
 	map.createFromObjects('fuel', 3,'fuelHigh',0,true,false,fuel, Phaser.Sprite, false, false);
 }

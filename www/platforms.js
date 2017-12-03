@@ -8,7 +8,7 @@ function initGroups(){
 
 function onFuelOverlap(playerObj, fuel){
     player.player.body.velocity.y = -fuel.velocity;
-    fuel.kill();
+   // fuel.kill();
 }
 
 function onPlatformCollision(playerObj, platform){
