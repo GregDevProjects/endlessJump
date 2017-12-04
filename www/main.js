@@ -29,13 +29,15 @@ window.onload = function() {
     function create () {
       setPhysics();   
       input = new Input();
-
+      game.renderer.renderSession.roundPixels = true;
       game.time.advancedTiming = true;
       game.stage.backgroundColor = 0xcc7b09;
 
       initGroups();
       initTileMap();
       tileObjectsToSprites();
+
+
   
     }
 
@@ -43,19 +45,13 @@ window.onload = function() {
       game.physics.arcade.collide(player.player, platforms);
       game.physics.arcade.overlap(player.player, fuel, onFuelOverlap, null, this);
       input.dragControl();
-      if(player.player.alive === false){
-        //debugger;
-       // initPlayer();
-        player.construct();
-        setTimeout(function(){ cameraFollowPlayer(); }, 1000);
-        
-      }
+
     }
 
 
     function render() {
         game.debug.pointer(game.input.activePointer);
         game.debug.text(game.time.fps, 2, 14, "#00ff00");
-        //game.debug.body(spritename);
+        game.debug.body(player.player);
     }
 };

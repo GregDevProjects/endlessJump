@@ -67,7 +67,8 @@ function tileObjectsToSprites(){
 
 //spawns new player at the playerStart object from the tilesheet
 function initPlayer(){
-	//delete player;
+	
 	player = new Player();
     cameraFollowPlayer();
+   // game.camera.targetOffset.set(0);
 }

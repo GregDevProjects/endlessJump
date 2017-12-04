@@ -13,6 +13,8 @@ function onFuelOverlap(playerObj, fuel){
 
     if(fuel.key === 'fuelXl'){
       player.player.body.allowGravity = false;
+      game.camera.lerp.y = 0.05
+      game.camera.targetOffset.y = -game.height/2;
     } 
     player.player.body.velocity.y = -fuel.velocity;
    // fuel.kill();
@@ -28,7 +30,7 @@ function onDeathLayerCollide(playerObj, killObject){
   console.log('hit');
   //debugger;
   // game.camera.flash(0xff0000, 500);
-  // player.player.kill();
+  //player.player.kill();
   // initPlayer();
-  player.respawnAfterDeath();
+  player.death();
 }
