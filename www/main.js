@@ -39,7 +39,7 @@ window.onload = function() {
       initTileMap();
       tileObjectsToSprites();
 
-       emitter = game.add.emitter(0, 0, 100);
+       emitter = game.add.emitter(0, 0, 50);
        emitter.makeParticles('jetParticle');
        player.player.addChild(emitter);
        emitter.y = 50;
@@ -48,7 +48,7 @@ window.onload = function() {
       
       emitter.minRotation = 0;
       emitter.maxRotation = 0;
-      emitter.gravity = 500;
+      emitter.gravity = 1000;
       emitter.setAlpha(1,0,0);
      
     //emitter.flow( 1000, 250, 25, -1);
@@ -60,7 +60,7 @@ window.onload = function() {
     // emitter.start( false, 500 , 2, 500);
     //  emitter.emitParticle();
      if(bursting){
-      emitter.flow( 500, 25, 7, -1);
+      emitter.flow( 300, 50, 5, -1);
      }
       
       game.physics.arcade.collide(player.player, platforms);
