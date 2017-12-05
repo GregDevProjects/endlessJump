@@ -18,11 +18,6 @@ function Player() {
         game.camera.target = null;
         game.camera.flash(0xff0000, 500);
         this.player.kill();
-       // initPlayer();
-
-//          setTimeout(function(){ 
-// newPlayer();
-//         }, 500);
 
             var x = map.objects.playerStart[0].x; 
         var y =map.objects.playerStart[0].y;
@@ -33,13 +28,7 @@ function Player() {
         this.player.revive(x,y);
         game.camera.targetOffset.set(0);
          cameraFollowPlayer();
-        // var x = map.objects.playerStart[0].x; 
-        // var y =map.objects.playerStart[0].y;
-        // player.player.x = x;
-        // player.player.y = y;
-        // this.construct(construct)
-        //probably need to wait for the update loop before camera follows again
-      //  cameraFollowPlayer();
+
 
     }
 

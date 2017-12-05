@@ -27,12 +27,14 @@ LVL 1 - underground
 	-introduce player to gamplay elements 
 		- not too challenging 
 		- limited jumping
-- spikes 
-- lava
-- fireballs 
-
-- stuff that can kill you:
-	- fire 
+	- stuff that can kill you:
+		- spikes 
+		- lava
+		- fireballs
+	- camera zooms out on xl fuel 
+- NEXT STEP:
+	- add spikes to xl fuel
+	- only collide with top of spikes
 
 GLOBAL 
 - movements mechanics not solid 

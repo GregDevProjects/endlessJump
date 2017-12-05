@@ -35,7 +35,7 @@ function addGidToObjects(){
 				break;
 			case "xl":
 				map.objects.fuel[i].properties.velocity = xl;
-				map.objects.fuel[i].gid = 4;											
+				map.objects.fuel[i].gid = 3;											
 		}
 	}
 
@@ -45,9 +45,11 @@ function initTileMap(){
  	map = game.add.tilemap('mapName');    
 	addGidToObjects(); 
 	map.addTilesetImage('fuel', 'platform');    
-	map.addTilesetImage('lava', 'lava');    
+ 
+	map.addTilesetImage('deathTiles', 'deathTiles');  
 	platforms = map.createLayer('platforms');    
-	map.setTileIndexCallback(2, onDeathLayerCollide, this);
+	map.setTileIndexCallback(3, onSpikesCollide, this);
+	map.setTileIndexCallback(2, onLavaCollide, this);
 	map.setCollision(1);
 	platforms.resizeWorld();
 }
