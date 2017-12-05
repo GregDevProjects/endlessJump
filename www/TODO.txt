@@ -33,8 +33,11 @@ LVL 1 - underground
 		- fireballs
 	- camera zooms out on xl fuel 
 - NEXT STEP:
-	- add spikes to xl fuel
-	- only collide with top of spikes
+	- add spikes 
+		- only collide with top of spikes
+	- add fireball pit 
+	- code cleanup 
+	- blue sparks for super battery 
 
 GLOBAL 
 - movements mechanics not solid 

@@ -35,7 +35,7 @@ function addGidToObjects(){
 				break;
 			case "xl":
 				map.objects.fuel[i].properties.velocity = xl;
-				map.objects.fuel[i].gid = 3;											
+				map.objects.fuel[i].gid = 4;											
 		}
 	}
 
@@ -64,7 +64,7 @@ function tileObjectsToSprites(){
 	fuel.callAll('animations.add', 'animations', 'glow', [0, 1,2,3], 10, true);
     fuel.callAll('animations.play', 'animations', 'glow');
 
-	initPlayer();
+	
 }
 
 //spawns new player at the playerStart object from the tilesheet

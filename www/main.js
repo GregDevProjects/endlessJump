@@ -4,7 +4,7 @@ var input;
 var map;
 //tile layer of platforms 
 var platforms; 
-var bursting = false;
+var particles;
 window.onload = function() {
 
     var width = window.innerWidth;// * window.devicePixelRatio;
@@ -38,31 +38,20 @@ window.onload = function() {
       initGroups();
       initTileMap();
       tileObjectsToSprites();
-
-       emitter = game.add.emitter(0, 0, 50);
-       emitter.makeParticles('jetParticle');
-       player.player.addChild(emitter);
-       emitter.y = 50;
-  emitter.x = 25;
-      emitter.frequency = 1;
+      particles = new Particles();
+      initPlayer();
       
-      emitter.minRotation = 0;
-      emitter.maxRotation = 0;
-      emitter.gravity = 1000;
-      emitter.setAlpha(1,0,0);
-     
-    //emitter.flow( 1000, 250, 25, -1);
+
     }
 
 
 
     function update() {
-    // emitter.start( false, 500 , 2, 500);
-    //  emitter.emitParticle();
-     if(bursting){
-      emitter.flow( 300, 50, 5, -1);
-     }
-      
+      //hackey 
+      if(particles.isBurstingActive){
+        particles.jetpackParticleFlare();
+      }
+
       game.physics.arcade.collide(player.player, platforms);
       game.physics.arcade.overlap(player.player, fuel, onFuelOverlap, null, this);
       input.dragControl();
