@@ -10,9 +10,9 @@ window.onload = function() {
     var width = window.innerWidth;// * window.devicePixelRatio;
     var height = window.innerHeight;// * window.devicePixelRatio;
 
-    game = new Phaser.Game(width, height, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
+    game = new Phaser.Game(width, height, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
     
-
+    //(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'gameArea')
     function preload () {
         game.load.image('platform', 'img/dirtWall.png');
         game.load.image('player', 'img/playerProto.png');

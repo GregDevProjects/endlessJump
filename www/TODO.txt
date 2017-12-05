@@ -46,7 +46,5 @@ GLOBAL
 
 
 CODE STUFF 
-- use different groups for different types of platforms 
-- tilemaps 
-	- http://www.html5gamedevs.com/topic/7102-how-to-use-tiled-map-editor-with-phaser/
-	- http://www.mapeditor.org/
+- preformance boost 
+	-https://cocoon.io/
