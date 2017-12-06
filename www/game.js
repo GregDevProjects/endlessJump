@@ -38,6 +38,11 @@ function addGidToObjects(){
 				map.objects.fuel[i].gid = 4;											
 		}
 	}
+	for (var i=0;i<map.objects.fireballSpawn.length;i++) {
+		map.objects.fireballSpawn[i].gid = 5;
+		var aSpawner = map.objects.fireballSpawn[i];
+		spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height);
+	}
 
 }
 

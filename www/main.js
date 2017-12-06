@@ -10,7 +10,7 @@ window.onload = function() {
     var width = window.innerWidth;// * window.devicePixelRatio;
     var height = window.innerHeight;// * window.devicePixelRatio;
 
-    game = new Phaser.Game(width, height, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+    game = new Phaser.Game(width, height, Phaser.CANVAS, '', { preload: preload, create: create, update: update, render: render });
     
     //(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.AUTO, 'gameArea')
     function preload () {
@@ -25,6 +25,7 @@ window.onload = function() {
        
         game.load.image('deathTiles', 'img/deathTiles.png');
         game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
+        game.load.spritesheet('fireball','img/fireBall.png',116.333,168,7);
         game.load.tilemap('mapName', 'tilemaps/test.json', null, Phaser.Tilemap.TILED_JSON);
     }
 
@@ -40,11 +41,27 @@ window.onload = function() {
       tileObjectsToSprites();
       particles = new Particles();
       initPlayer();
-      
+      spawnFireBall();
 
+    //       test.call('animations.add', 'animations', 'glow', [0, 1,2,3], 10, true);
+    // fuel.callAll('animations.play', 'animations', 'glow');
     }
 
 
+    function spawnFireBall(){
+      test =  game.add.sprite( 80, 4600, 'fireball');
+      game.physics.arcade.enable(test);
+      //  test.anchor.set(.5, 1)
+      test.animations.add('burn',null,45,true);
+      test.animations.play('burn');
+      test.scale.y *= -1;
+      test.body.offset.y = 30;
+      test.body.offset.x = 30
+      test.body.width = 50;
+      test.body.height = 120;
+      test.allowGravity = false;
+      test.body.velocity.y = -150;
+    }
 
     function update() {
       //hackey 
@@ -62,6 +79,6 @@ window.onload = function() {
     function render() {
         game.debug.pointer(game.input.activePointer);
         game.debug.text(game.time.fps, 2, 14, "#00ff00");
-      //  game.debug.body(player.player);
+        game.debug.body(test);
     }
 };

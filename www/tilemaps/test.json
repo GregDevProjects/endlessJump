@@ -23,8 +23,8 @@
                  "type":"",
                  "visible":true,
                  "width":42,
-                 "x":280.727272727273,
-                 "y":3424.45454545455
+                 "x":84.727272727273,
+                 "y":10781.7878787879
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -357,8 +357,38 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "color":"#ef0fff",
+         "draworder":"topdown",
+         "name":"fireballSpawn",
+         "objects":[
+                {
+                 "height":45.333333333333,
+                 "id":108,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":394.666666666667,
+                 "x":152,
+                 "y":4652
+                }],
+         "opacity":1,
+         "properties":
+            {
+             "frequency":2000
+            },
+         "propertytypes":
+            {
+             "frequency":"int"
+            },
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":107,
+ "nextobjectid":109,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",
