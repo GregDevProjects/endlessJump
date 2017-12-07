@@ -41,34 +41,23 @@ window.onload = function() {
       tileObjectsToSprites();
       particles = new Particles();
       initPlayer();
-      spawnFireBall();
+      //spawnFireBall();
 
     //       test.call('animations.add', 'animations', 'glow', [0, 1,2,3], 10, true);
     // fuel.callAll('animations.play', 'animations', 'glow');
     }
 
 
-    function spawnFireBall(){
-      test =  game.add.sprite( 80, 4600, 'fireball');
-      game.physics.arcade.enable(test);
-      //  test.anchor.set(.5, 1)
-      test.animations.add('burn',null,45,true);
-      test.animations.play('burn');
-      test.scale.y *= -1;
-      test.body.offset.y = 30;
-      test.body.offset.x = 30
-      test.body.width = 50;
-      test.body.height = 120;
-      test.allowGravity = false;
-      test.body.velocity.y = -150;
-    }
+
 
     function update() {
       //hackey 
+      spawner.start();
       if(particles.isBurstingActive){
         particles.jetpackParticleFlare();
       }
-
+      game.physics.arcade.overlap(player.player, fireball, onFireballPlayerOverlap);
+      game.physics.arcade.overlap(fireball, platforms, onFireballPlatformOverlap);
       game.physics.arcade.collide(player.player, platforms);
       game.physics.arcade.overlap(player.player, fuel, onFuelOverlap, null, this);
       input.dragControl();
@@ -79,6 +68,8 @@ window.onload = function() {
     function render() {
         game.debug.pointer(game.input.activePointer);
         game.debug.text(game.time.fps, 2, 14, "#00ff00");
-        game.debug.body(test);
+      //  game.debug.body(test);
     }
+
+
 };

@@ -6,6 +6,10 @@ function initGroups(){
     fuel.enableBody = true;
     fuelXl = game.add.group();
     fuelXl.enableBody = true;
+
+    fireball = game.add.group();
+    fireball.enableBody = true;
+
   }
 
 
@@ -40,4 +44,18 @@ function onLavaCollide(playerObj, killObject){
 
 function onSpikesCollide(playerObj, killObject){
    player.death();
+}
+
+function onFireballPlayerOverlap(playerObj, fireballObj){
+  player.death();
+}
+
+function onFireballPlatformOverlap(fireBallObj, tileCollide){
+  //debugger;
+  if(tileCollide.index === 1){
+    fireBallObj.kill();
+    //fireBallObj.destroy();
+  }
+  
+
 }
