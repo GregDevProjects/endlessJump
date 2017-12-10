@@ -38,6 +38,8 @@ LVL 1 - underground
 	- add fireball pit 
 	- code cleanup 
 	- blue sparks for super battery 
+	- use enums for tile index 
+	- check collisions on fireballs
 
 GLOBAL 
 - movements mechanics not solid 

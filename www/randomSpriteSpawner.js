@@ -9,20 +9,20 @@ function randomSpriteSpawner(sprite,x,y,width,height, interval){
 	this.spawnReady = true;
 	this.interval = interval;
 
-	this.start = function(){
+	this.start = function(game){
 		// if(fireball.children.length > this.maxSprites + 1){
 		// 	return;
 		// }
 		if(!this.spawnReady){
 			return;
 		}
-		 game.time.events.add(this.interval, function(){ this.spawnReady = true; }, this);
-		var position = this.getRandomPosition();
-		this.spawnFireBall(position.x,position.y); 
+		game.time.events.add(this.interval, function(){ this.spawnReady = true; }, this);
+		var position = this.getRandomPosition(game);
+		this.spawnFireBall(position.x,position.y, game); 
 		this.spawnReady = false;
 	}
 
-	this.getRandomPosition = function(){
+	this.getRandomPosition = function(game){
 		var x = game.rnd.integerInRange(this.x, this.x + this.width);
 		var y = game.rnd.integerInRange(this.y, this.y + this.height);
 		return { x,y };
@@ -44,10 +44,10 @@ function randomSpriteSpawner(sprite,x,y,width,height, interval){
 
 	}
 
-	this.spawnFireBall = function(x,y){
+	this.spawnFireBall = function(x,y, game){
 	  y+=100;
 	  x-=50;
-      var test = fireball.create( x, y, 'fireball');
+      var test = Jetman.Platforms.fireball.create( x, y, 'fireball');
       game.physics.arcade.enable(test);
       //  test.anchor.set(.5, 1)
       test.animations.add('burn',null,45,true);

@@ -1,6 +1,8 @@
-function Particles(){
-	this.isBurstingActive = false;
-	 this.construct = function(){
+Jetman.Particles = {
+	
+	 initParticles: function(game){
+	 	this.game = game;
+	 	this.isBurstingActive = false,
 		this.emitter = game.add.emitter(0, 0, 100);
 		this.emitter.makeParticles('jetParticle');
 		this.emitter.frequency = 1;
@@ -11,29 +13,27 @@ function Particles(){
 		this.emitter.lifespan = 300;
 		this.emitter.frequency = 50;
 		//this.emitter.quantity = 25;
-	}
+	},
 
-	this.construct();
-
-	this.jetpackParticleFlare = function(){
-		this.emitter.y = player.player.centerY;
-		this.emitter.x = player.player.centerX;
-		this.emitter.emitX = player.player.centerX;
-		this.emitter.emitY = player.player.centerY;
+	jetpackParticleFlare: function(){
+		this.emitter.y = Jetman.Player.sprite.centerY;
+		this.emitter.x =  Jetman.Player.sprite.centerX;
+		this.emitter.emitX =  Jetman.Player.sprite.centerX;
+		this.emitter.emitY =  Jetman.Player.sprite.centerY;
 		this.emitter.start(true, 300, 50, 4);
-    }
+    },
 
-    this.startParticleBurstWithTimeout = function(){
+    startParticleBurstWithTimeout: function(){
         this.isBurstingActive = true;
         function stopburst(){
           this.isBurstingActive = false;
         }
-        game.time.events.add(250, stopburst, this);
-    }
+        this.game.time.events.add(250, stopburst, this);
+    },
 
-    this.startParticleBurstNoTimeout = function(){
+    startParticleBurstNoTimeout: function(){
     	this.isBurstingActive = true;
     }
 
-    return this;
-}
+};
+
