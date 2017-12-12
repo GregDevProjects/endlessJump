@@ -1,8 +1,5 @@
 TODO:
 - find a way to organize code going forward 
-	- use functions as classes for encapulation 
-	- 1 file per class
-	- avoid globals
 - learn how to run on mobile device
 	- https://software.intel.com/en-us/articles/how-to-make-a-mobile-virtual-pet-game-with-html5-and-cordova
 
@@ -31,11 +28,12 @@ LVL 1 - underground
 		- spikes 
 		- lava
 		- fireballs
-	- camera zooms out on xl fuel 
+
 - NEXT STEP:
 	- add spikes 
 		- only collide with top of spikes
 	- add fireball pit 
+		- directions for spawner
 	- code cleanup 
 	- blue sparks for super battery 
 	- use enums for tile index 
@@ -46,8 +44,9 @@ GLOBAL
 	- apply speady velocity for a limited time 
 	- direction depends on what angle the player is at 
 
-
-CODE STUFF 
-- preformance boost 
-	-https://cocoon.io/
-	-https://github.com/CocoonIO/cocoon-template-phaser
+Tutorial 
+- ask about project organization 
+- ask about emitter 
+- ask about gids on tiled 
+- look into github security 
+	- can anyone push to my branch?

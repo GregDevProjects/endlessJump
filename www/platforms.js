@@ -118,7 +118,7 @@ Jetman.Platforms = {
         //ADD THESE TO AN ARRAY OR SOMWTHING 
         this.map.objects.fireballSpawn[i].gid = 5;
         var aSpawner = this.map.objects.fireballSpawn[i];
-        spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height, 2000);
+        spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height, 4000);
       }
   }
 
