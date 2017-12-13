@@ -28,7 +28,7 @@ Jetman.Platforms = {
         Jetman.Particles.startParticleBurstWithTimeout();
          
       } 
-      Jetman.Player.sprite.body.velocity.y = -fuel.velocity;
+     // Jetman.Player.sprite.body.velocity.y = -fuel.velocity;
      // fuel.kill();
   },
 
@@ -62,7 +62,7 @@ Jetman.Platforms = {
     
 
   },    
-
+  //init level 1 
   initTileMap: function(game) {
       this.map = game.add.tilemap('mapName');    
       this.addGidToObjects(); 
@@ -88,7 +88,7 @@ Jetman.Platforms = {
   },
 
   addGidToObjects: function() {
-      var small = 400;
+      var small = 300;
       var med = 600;
       var large = 900;
       var xl = 400;

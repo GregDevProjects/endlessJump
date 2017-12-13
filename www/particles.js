@@ -24,11 +24,36 @@ Jetman.Particles = {
     },
 
     startParticleBurstWithTimeout: function(){
-        this.isBurstingActive = true;
+    	//debugger;
+    	
+    	Jetman.Player.fuel =100;
+    	return;
+    	Jetman.Player.hasFuel = true;
+        this.isBurstingActive = true; 
         function stopburst(){
+        	//debugger;
+        	console.log('started');
+        	Jetman.Player.hasFuel = false;
           this.isBurstingActive = false;
         }
-        this.game.time.events.add(250, stopburst, this);
+
+        if(Jetman.Player.hasFuel === false){
+      		
+        	this.game.time.events.add(1500, stopburst, this);
+        	
+        }else{
+
+        	//this.game.time.events.events[0].timer.destroy();
+
+        	//this.game.time.events.add(1500, stopburst, this);
+        	//debugger;
+        }
+        	//console.log(this.game.time.events.events[0].delay);// = 1500;
+      //  }
+       // }else{
+        	//this.game.time.events.elapsed += 1500;
+      //  }
+        
     },
 
     startParticleBurstNoTimeout: function(){

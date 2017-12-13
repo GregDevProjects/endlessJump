@@ -30,6 +30,9 @@ LVL 1 - underground
 		- fireballs
 
 - NEXT STEP:
+	- figure out proper size for game 
+		-center game 
+	- get timer working right 
 	- add spikes 
 		- only collide with top of spikes
 	- add fireball pit 

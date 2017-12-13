@@ -27,12 +27,22 @@ Jetman.Level1.prototype = {
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Platforms.fuel, Jetman.Platforms.onFuelOverlap, null, this);
       Jetman.Input.dragControl(this.game);
 
+      if(Jetman.Player.fuel >0){
+        Jetman.Player.fuel--;
+        Jetman.Particles.isBurstingActive = true;
+        console.log( Jetman.Player.fuel);
+      }else{
+         Jetman.Particles.isBurstingActive = false;
+      }
     },
 
 
     render: function() {
         this.game.debug.pointer(this.game.input.activePointer);
-        this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+       // this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+   this.game.debug.text(Jetman.Player.fuel);
+    //         this.game.debug.text("Time until event: " + this.game.time.events.duration.toFixed(0), 32, 32);
+    // this.game.debug.text("Next tick: " + this.game.time.events.next.toFixed(0), 32, 64);
       //  this.game.debug.body(test);
     }
 }

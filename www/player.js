@@ -1,5 +1,6 @@
 Jetman.Player = {
     initPlayer: function(game){
+        firstrun = true;
         this.game = game;
         var x = Jetman.Platforms.map.objects.playerStart[0].x; 
         var y = Jetman.Platforms.map.objects.playerStart[0].y;
@@ -9,6 +10,10 @@ Jetman.Player = {
         this.sprite.body.collideWorldBounds=true;
         this.sprite.body.gravity.y = 300;    
         this.game.camera.follow(this.sprite);
+        this.game.camera.targetOffset.y = -game.height/4;
+
+        this.fuel = 100;
+       // this.hasFuel = false;
     },
 
     death: function(){
@@ -28,11 +33,11 @@ Jetman.Player = {
     },
 
     moveRight: function(){
-        this.sprite.body.velocity.x = 200;
+        this.sprite.body.velocity.x = 50;
     },
 
     moveLeft: function(){
-        this.sprite.body.velocity.x = -200; 
+        this.sprite.body.velocity.x = -50; 
     },
 
     stop: function(){
