@@ -64,6 +64,9 @@ Jetman.Platforms = {
   },    
   //init level 1 
   initTileMap: function(game) {
+      //WASH ME
+      this.game = game;
+
       this.map = game.add.tilemap('mapName');    
       this.addGidToObjects(); 
       this.map.addTilesetImage('fuel', 'platform');    
@@ -92,6 +95,9 @@ Jetman.Platforms = {
       var med = 600;
       var large = 900;
       var xl = 400;
+
+      Jetman.SpikeEnemies.init(this.map,this.game);
+      
       for (var i=0;i<this.map.objects.fuel.length;i++) {
         //map.objects.fuel[i].height = 25;
         //map.objects.fuel[i].width = 50;
@@ -114,12 +120,32 @@ Jetman.Platforms = {
             this.map.objects.fuel[i].gid = 4;                      
         }
       }
-      for (var i=0;i<this.map.objects.fireballSpawn.length;i++) {
-        //ADD THESE TO AN ARRAY OR SOMWTHING 
-        this.map.objects.fireballSpawn[i].gid = 5;
-        var aSpawner = this.map.objects.fireballSpawn[i];
-        spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height, 4000);
-      }
+      // for (var i=0;i<this.map.objects.fireballSpawn.length;i++) {
+      //   //ADD THESE TO AN ARRAY OR SOMWTHING 
+      //   this.map.objects.fireballSpawn[i].gid = 5;
+      //   var aSpawner = this.map.objects.fireballSpawn[i];
+      //   spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height, 4000);
+      // }
+
+
+
+      // for (var i=0;i<this.map.objects.spikeEnemy.length;i++) {
+
+      //  // switch(this.map.objects.spikeEnemy[i].name){
+      //   Jetman.SpikeEnemies.init(
+      //     this.map.objects.spikeEnemy[i].name,
+      //     this.map.objects.spikeEnemy[i].x,
+      //     this.map.objects.spikeEnemy[i].y,
+      //     this.game
+      //   );
+
+      // //  }
+      //   //ADD THESE TO AN ARRAY OR SOMWTHING 
+      //   // this.map.objects.spikeEnemy[i].gid = 6;
+
+      //   // var aSpawner = this.map.objects.fireballSpawn[i];
+      //   // spawner = new randomSpriteSpawner(1,aSpawner.x,aSpawner.y,aSpawner.width,aSpawner.height, 4000);
+      // }
   }
 
 

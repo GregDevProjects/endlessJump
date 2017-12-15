@@ -13,10 +13,10 @@ TODO:
 		-start on ground level 
 			-gravity is high 
 			-fuel is shorter apart
-			-rotate camera on entry to space
+			-rotate camera o
+			-fuel is longer apart n entry to space
 		-go to space 
 			-gravity is low 
-			-fuel is longer apart 
 	
 
 LVL 1 - underground 
@@ -28,6 +28,10 @@ LVL 1 - underground
 		- spikes 
 		- lava
 		- fireballs
+
+-RIGHT NOW
+	- jetpack stops when touch stops 
+	- jetpack timing code cleanup 
 
 - NEXT STEP:
 	- figure out proper size for game 

@@ -11,8 +11,8 @@ Jetman.Player = {
         this.sprite.body.gravity.y = 300;    
         this.game.camera.follow(this.sprite);
         this.game.camera.targetOffset.y = -game.height/4;
-
-        this.fuel = 100;
+        this.sprite.anchor.setTo(0.5, 0.5);
+        this.fuel = 0;
        // this.hasFuel = false;
     },
 
@@ -40,8 +40,27 @@ Jetman.Player = {
         this.sprite.body.velocity.x = -50; 
     },
 
+    flyToActivePointer: function(){
+        if(this.fuel <= 0){
+            this.sprite.body.allowGravity = true;
+            return false;
+        }
+        Jetman.Player.sprite.body.allowGravity = false; 
+        this.game.physics.arcade.moveToPointer(Jetman.Player.sprite, 200, this.game.input.activePointer, 0);
+        Jetman.Player.anglePlayerToPointer();
+        Jetman.Particles.jetpackParticleFlare();
+        this.fuel--;
+        return true;
+    },
+
     stop: function(){
+        this.sprite.body.allowGravity = true;
         this.sprite.body.velocity.x = 0;
+    },
+
+    anglePlayerToPointer: function() {
+      this.sprite.rotation = this.game.physics.arcade.angleToPointer(Jetman.Player.sprite, this.game.input.activePointer);
+      this.sprite.angle += 90;
     }
 
 }

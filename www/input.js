@@ -3,23 +3,21 @@ Jetman.Input = {
 
 		if (!game.input.activePointer.isDown) {
 			Jetman.Player.stop();
-			
 			return;
 		}
 		this.moveToPointer(game);
-		return;
 	
 	},
 
 	moveToPointer: function(game){
-		if(Jetman.Particles.isBurstingActive === false){
-			Jetman.Player.sprite.body.allowGravity = true;
+		// if(Jetman.Particles.isBurstingActive === false){
+		// 	Jetman.Player.sprite.body.allowGravity = true;
+		// 	this.moveOnGround(game);
+		// 	return;
+		// }
+		if(!Jetman.Player.flyToActivePointer()){
 			this.moveOnGround(game);
-			return;
 		}
-		Jetman.Player.sprite.body.allowGravity = false; 
-		game.physics.arcade.moveToPointer(Jetman.Player.sprite, 200, game.input.activePointer, 0);
-		
 		//game.physics.arcade.moveToPointer, game.physics.arcade, false, 200
 	},
 
