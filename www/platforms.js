@@ -12,8 +12,8 @@ Jetman.Platforms = {
 
 
   onPlatformCollision: function (playerObj, platform){
-
-
+    Jetman.Player.startAnglingUpright();
+    
   },
 
   onDeathLayerCollide: function (playerObj, killObject){
