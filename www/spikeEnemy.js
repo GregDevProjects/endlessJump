@@ -85,7 +85,4 @@ Jetman.SpikeEnemies = {
 		} 
 	}
 
-	
-
-
 };

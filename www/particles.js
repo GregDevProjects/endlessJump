@@ -26,7 +26,7 @@ Jetman.Particles = {
     startParticleBurstWithTimeout: function(){
     	//debugger;
     	
-    	Jetman.Player.fuel =100;
+    	
     	return;
     	// Jetman.Player.hasFuel = true;
      //    this.isBurstingActive = true; 
