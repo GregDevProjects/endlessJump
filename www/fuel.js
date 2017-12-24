@@ -4,9 +4,9 @@ Jetman.Fuel = {
 	  this.group = game.add.group();
       this.group.enableBody = true;
 
-      var small = 300;
-      var med = 600;
-      var large = 900;
+      var small = 100;
+      var med = 200;
+      var large = 300;
       var xl = 400;
 
       for (var i=0;i<map.objects.fuel.length;i++) {
@@ -41,17 +41,14 @@ Jetman.Fuel = {
 	},
 
 	onFuelOverlap: function (playerObj, fuel){
-
       if(fuel.key === 'fuelXl'){
         player.player.body.allowGravity = false;
         game.camera.lerp.y = 0.05
         game.camera.targetOffset.y = -game.height/2;
         particles.startParticleBurstNoTimeout();
       } else {
-        Jetman.Particles.startParticleBurstWithTimeout();
-         
+      	Jetman.Player.fuel =fuel.velocity;
       } 
-     // Jetman.Player.sprite.body.velocity.y = -fuel.velocity;
-     // fuel.kill();
   }	
 };
+
