@@ -72,6 +72,7 @@ Jetman.Platforms = {
       this.map.addTilesetImage('fuel', 'platform');    
      
       this.map.addTilesetImage('deathTiles', 'deathTiles');  
+      this.map.addTilesetImage('escapeSign','escapeSign')
       this.platforms = this.map.createLayer('platforms');    
       this.map.setTileIndexCallback(3, Jetman.Platforms.onSpikesCollide, this);
       this.map.setTileIndexCallback(2, Jetman.Platforms.onLavaCollide, this); 
