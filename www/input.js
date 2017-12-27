@@ -10,20 +10,14 @@ Jetman.Input = {
 	},
 
 	moveToPointer: function(game){
-		// if(Jetman.Particles.isBurstingActive === false){
-		// 	Jetman.Player.sprite.body.allowGravity = true;
-		// 	this.moveOnGround(game);
-		// 	return;
-		// }
 		if(!Jetman.Player.flyToActivePointer()){
 			this.moveOnGround(game);
 		}
-		//game.physics.arcade.moveToPointer, game.physics.arcade, false, 200
 	},
 
 	moveOnGround: function(game){
-		var playerPositionX = Jetman.Player.sprite.x;
-	    var playerMiddle = playerPositionX + Jetman.Player.sprite.width/2;
+		var playerPositionX = Jetman.Player.sprite.centerX;
+	    var playerMiddle = playerPositionX;//+ Jetman.Player.sprite.width/2;
 	    var tapPositionX = game.input.activePointer.x  + game.camera.x;
 	    if (playerMiddle - 5 <= tapPositionX && playerMiddle + 5 >= tapPositionX){
 	        Jetman.Player.stop();
@@ -37,4 +31,5 @@ Jetman.Input = {
 	    } 			
 	}
 }
+
 

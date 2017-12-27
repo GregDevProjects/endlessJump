@@ -13,6 +13,7 @@ Jetman.Platforms = {
 
   onPlatformCollision: function (playerObj, platform){
     Jetman.Player.startAnglingUpright();
+   // Jetman.Player.isOnJumpPadMomentum = false;
     
   },
 
@@ -32,6 +33,10 @@ Jetman.Platforms = {
     Jetman.Player.death();
   },
 
+  onWallColide : function(){
+
+  },
+
   onFireballPlatformOverlap: function (fireBallObj, tileCollide){
     //debugger;
     if(tileCollide.index === 1){
@@ -48,12 +53,18 @@ Jetman.Platforms = {
       this.map = game.add.tilemap('mapName');    
      // this.addGidToObjects(); 
       this.map.addTilesetImage('fuel', 'platform');    
-     
       this.map.addTilesetImage('deathTiles', 'deathTiles');  
-      this.platforms = this.map.createLayer('platforms');    
+
+      this.platforms = this.map.createLayer('platforms');  
+
+      this.walls = this.map.createLayer('wall');   
+
       this.map.setTileIndexCallback(3, Jetman.Platforms.onSpikesCollide, this);
       this.map.setTileIndexCallback(2, Jetman.Platforms.onLavaCollide, this); 
-      this.map.setCollision(1);
+
+      this.map.setCollision(1,true, 0);
+      this.map.setCollision(1,true, 1);
+     // this.map.setCollision(2);
       this.platforms.resizeWorld();
     }
 

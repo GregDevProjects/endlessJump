@@ -18,8 +18,10 @@ Jetman.Player = {
         this.fuel = 0;
         this.enableAngleCorrection = false;
         this.sprite.body.bounce.y = 1;
+      //  this.sprite.body.bounce.x = 0.5;
         Jetman.Player.sprite.body.maxVelocity.y= this.flySpeed;
 
+        this.isOnJumpPadMomentum = false;
        // this.hasFuel = false;
     },
 
@@ -35,23 +37,26 @@ Jetman.Player = {
         this.sprite.body.allowGravity = true;
         this.sprite.body.velocity.set(0);
         this.sprite.revive(x,y);
-        this.game.camera.targetOffset.set(0);
+      //  this.game.camera.targetOffset.set(0);
         this.game.camera.follow(this.sprite);    
     },
 
     moveRight: function(){
+      //  if(this.sprite.body.blocked.down)
         this.sprite.body.velocity.x = 50;
     },
 
     moveLeft: function(){
+      //  if(this.sprite.body.blocked.down)
         this.sprite.body.velocity.x = -50; 
     },
 
     flyToActivePointer: function(){
-        if(this.fuel <= 0){
+        if(this.fuel <= 0 || this.isOnJumpPadMomentum){
             this.sprite.body.allowGravity = true;
             return false;
         }
+        this.enableAngleCorrection = false;
         Jetman.Player.sprite.body.allowGravity = false; 
         this.game.physics.arcade.moveToPointer(Jetman.Player.sprite, this.flySpeed, this.game.input.activePointer, 0);
         Jetman.Player.anglePlayerToPointer();
@@ -62,7 +67,10 @@ Jetman.Player = {
 
     stop: function(){
         this.sprite.body.allowGravity = true;
-        this.sprite.body.velocity.x = 0;
+         this.sprite.body.velocity.x = 0;
+        // if(this.sprite.body.blocked.down){
+        //     this.sprite.body.velocity.x = 0;
+        // }
     },
 
     anglePlayerToPointer: function() {
@@ -71,7 +79,7 @@ Jetman.Player = {
     },
 
     angleUpright: function() {
-        if(this.enableAngleCorrection){
+        if(this.enableAngleCorrection && !this.isOnJumpPadMomentum){
             if(this.sprite.body.rotation >= 2.5 || this.sprite.body.rotation <= -2.5){
               if(this.sprite.body.rotation < 0){
                 this.sprite.body.rotation += 5;
@@ -83,10 +91,31 @@ Jetman.Player = {
             }
             
         }
+
+     
+            this.handleJumpPadSpin();
+        
+
+
     },
 
     startAnglingUpright: function(){
          this.enableAngleCorrection = true;
+    },
+
+    handleJumpPadSpin: function(){
+        if(!this.isOnJumpPadMomentum){
+            return;
+        }
+        this.sprite.body.rotation += 8;
+        if(this.sprite.body.velocity.y>=-20){
+            this.isOnJumpPadMomentum = false;
+            Jetman.Player.sprite.body.maxVelocity.y= this.flySpeed;
+            this.startAnglingUpright();
+        }       
     }
 
 }
+
+//if running out of fuel while holding keep momentum \
+//go slow when out of fuel

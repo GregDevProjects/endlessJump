@@ -12,6 +12,7 @@ Jetman.Level1.prototype = {
       //TODO: new object for map 
       Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
       Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
+      Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
     },
 
     update: function() {
@@ -20,9 +21,15 @@ Jetman.Level1.prototype = {
 
       this.game.physics.arcade.overlap(Jetman.Platforms.fireball, Jetman.Platforms.platforms, Jetman.Platforms.onFireballPlatformOverlap);
 
+      //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformCollision, null, this); 
+      this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.walls, Jetman.Platforms.onWallColide, null, this); 
 
-      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Fuel.group, Jetman.Fuel.onFuelOverlap, null, this);
+      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
+
+       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Fuel.group, Jetman.Fuel.onFuelOverlap, null, this);
+
+
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.SpikeEnemies.group, Jetman.SpikeEnemies.onPlayerSpikeEnemyOverlap);
 
@@ -33,6 +40,7 @@ Jetman.Level1.prototype = {
       });
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
+      this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.walls, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
       Jetman.Player.angleUpright();
       
     },
