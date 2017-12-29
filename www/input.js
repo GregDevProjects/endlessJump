@@ -16,6 +16,7 @@ Jetman.Input = {
 	},
 
 	moveOnGround: function(game){
+
 		var playerPositionX = Jetman.Player.sprite.centerX;
 	    var playerMiddle = playerPositionX;//+ Jetman.Player.sprite.width/2;
 	    var tapPositionX = game.input.activePointer.x  + game.camera.x;

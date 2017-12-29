@@ -75,7 +75,7 @@ Jetman.Player = {
 
     anglePlayerToPointer: function() {
       this.sprite.rotation = this.game.physics.arcade.angleToPointer(Jetman.Player.sprite, this.game.input.activePointer);
-      this.sprite.angle += 90;
+      this.sprite.angle += 95;
     },
 
     angleUpright: function() {

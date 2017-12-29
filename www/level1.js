@@ -5,6 +5,8 @@ Jetman.Level1.prototype = {
       this.game.time.advancedTiming = true;
       this.game.stage.backgroundColor = 0xcc7b09;
 
+      
+
       Jetman.Platforms.initGroups(this.game);
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
@@ -56,6 +58,12 @@ Jetman.Level1.prototype = {
         //this.game.debug.spriteInfo(Jetman.Player.sprite, 32, 32);
 
      // Jetman.SpikeEnemies.group.forEach( this.game.debug.body);
+     //if(typeof x != undefined){
+     this.game.debug.pixel( Jetman.SpikeEnemies.group.children[5].eye.world.x +100, Jetman.SpikeEnemies.group.children[5].eye.world.y + 100, 'rgb(0,92,92)' );
+      
+        this.game.debug.text(Jetman.SpikeEnemies.group.children[5].eye.world.x, Jetman.SpikeEnemies.group.children[5].eye.world.y,'TEST');
+
+        this.game.debug.text(Jetman.SpikeEnemies.group.children[5].y + '  ' + Jetman.SpikeEnemies.group.children[5].eye.world.y,32,300);
 
     }
 

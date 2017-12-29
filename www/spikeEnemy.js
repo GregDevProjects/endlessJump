@@ -28,10 +28,13 @@ Jetman.SpikeEnemies = {
 	},	
 
 	SpikedEnemy: function(SpikeEnemyType,x,y,game){
-		this.sprite =game.add.sprite(x, y, 'spikeEnemy'); 
+		this.game = game;
+		this.sprite =this.game.add.sprite(x, y, 'spikeEnemy'); 
 		this.sprite.moveSpeed = 100;
 		this.sprite.type = SpikeEnemyType;
 		this.spikeEnemyType = SpikeEnemyType;
+		
+		
 		this.sprite.move = function(){
 
 			switch (this.type){
@@ -42,6 +45,7 @@ Jetman.SpikeEnemies = {
 					this.body.velocity.x = -this.moveSpeed;
 					return;
 				case Jetman.SpikeEnemyTypes.FOLLOW:
+					this.rotateEye(game);
 					if(this.centerX - 5 <= Jetman.Player.sprite.centerX && this.centerX + 5 >= Jetman.Player.sprite.centerX){
 						this.body.velocity.x = 0;
 						return;
@@ -51,16 +55,38 @@ Jetman.SpikeEnemies = {
 					} else {
 						this.body.velocity.x = this.moveSpeed;
 					}
+					//if(sprite)
+					
+					//this.sprite.children[0].rotation = this.sprite.children[0].angleToXY(Jetman.Player.centerX, Jetman.Player.centerY);
 					return;
 			}
 
 		}
 
+		this.attachEye = function(game){
+			this.sprite.eye = this.sprite.addChild(game.make.sprite(15, 45, 'spikeEnemyEye')); 
+			this.sprite.eye.anchor.setTo(0.5, 0.5);
+		}	
+
+		this.sprite.rotateEye = function(game ){
+			//console.log(game.physics.arcade.angleToXY(this, Jetman.Player.sprite.centerX, Jetman.Player.sprite.centerY));
+			//this.eye.world.x +=30;
+			//this.eye.world.y -=100; 
+			this.eye.rotation = game.physics.arcade.angleToXY({x:this.eye.world.x,y:this.eye.world.y}, Jetman.Player.sprite.centerX, Jetman.Player.sprite.centerY);
+			this.eye.rotation+=89.5;
+			x = this.eye.world.x;
+			y = this.eye.world.y;
+			//this.	eye.rotation = 1.5;
+		}
+
+		this.attachEye(game);
+
+
 		return this.sprite;
 	},
 
 	onPlayerSpikeEnemyOverlap: function(){
-		Jetman.Player.death();
+		//Jetman.Player.death();
 	},
 
 	onSpikedEnemyPlatformOverlap: function(spikeEnemy, platform){
@@ -84,5 +110,6 @@ Jetman.SpikeEnemies = {
 				return 3;
 		} 
 	}
+
 
 };
