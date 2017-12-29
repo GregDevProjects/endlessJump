@@ -25,7 +25,7 @@ Jetman.Level1.prototype = {
 
       //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformCollision, null, this); 
-      this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.walls, Jetman.Platforms.onWallColide, null, this); 
+
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
 
@@ -42,7 +42,7 @@ Jetman.Level1.prototype = {
       });
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
-      this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.walls, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
+
       Jetman.Player.angleUpright();
       
     },

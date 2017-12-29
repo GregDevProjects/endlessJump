@@ -12,11 +12,23 @@ Jetman.Platforms = {
 
 
   onPlatformCollision: function (playerObj, platform){
-    //debugger;
-    if(playerObj.body.blocked.down){
-      Jetman.Player.startAnglingUpright();
+     //might be better to create seprate layers for this kind of stuff
+    if(platform.index === 1){ 
+      //platform
+      if(playerObj.body.blocked.down){
+        Jetman.Player.startAnglingUpright();
+      }
     }
-    
+    if(platform.index === 2){
+      //lava
+      Jetman.Player.death();
+    }
+    if(platform.index === 3){
+      //spikes
+      if(playerObj.body.blocked.up){
+        Jetman.Player.death();
+      }
+    } 
   },
 
   onDeathLayerCollide: function (playerObj, killObject){
@@ -35,12 +47,6 @@ Jetman.Platforms = {
     Jetman.Player.death();
   },
 
-  onWallColide : function(playerObj){
-    if(playerObj.body.blocked.down){
-      Jetman.Player.startAnglingUpright();
-    }
-  },
-
   onFireballPlatformOverlap: function (fireBallObj, tileCollide){
     //debugger;
     if(tileCollide.index === 1){
@@ -55,20 +61,13 @@ Jetman.Platforms = {
       this.game = game;
 
       this.map = game.add.tilemap('mapName');    
-     // this.addGidToObjects(); 
+
       this.map.addTilesetImage('fuel', 'platform');    
       this.map.addTilesetImage('deathTiles', 'deathTiles');  
 
       this.platforms = this.map.createLayer('platforms');  
 
-      this.walls = this.map.createLayer('wall');   
-
-      this.map.setTileIndexCallback(3, Jetman.Platforms.onSpikesCollide, this);
-      this.map.setTileIndexCallback(2, Jetman.Platforms.onLavaCollide, this); 
-
-      this.map.setCollision(1,true, 0);
-      this.map.setCollision(1,true, 1);
-     // this.map.setCollision(2);
+      this.map.setCollision([1,2,3],true, 0);
       this.platforms.resizeWorld();
     }
 

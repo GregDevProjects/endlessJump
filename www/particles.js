@@ -23,28 +23,6 @@ Jetman.Particles = {
 		this.emitter.start(true, 300, 25, 4);
     },
 
-    startParticleBurstWithTimeout: function(){
-    	//debugger;
-    	
-    	
-    	return;
-    	// Jetman.Player.hasFuel = true;
-     //    this.isBurstingActive = true; 
-     //    function stopburst(){
-     //    	//debugger;
-     //    	console.log('started');
-     //    	Jetman.Player.hasFuel = false;
-     //      this.isBurstingActive = false;
-     //    }
-
-     //    if(Jetman.Player.hasFuel === false){
-      		
-     //    	this.game.time.events.add(1500, stopburst, this);
-        	
-     //    }
-        
-    },
-
     startParticleBurstNoTimeout: function(){
     	this.isBurstingActive = true;
     }
