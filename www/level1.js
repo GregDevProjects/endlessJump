@@ -53,6 +53,10 @@ Jetman.Level1.prototype = {
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       this.game.debug.text(Jetman.Player.fuel, 32,200);
 
+    //  this.game.debug.body(Jetman.JumpPad.group.children[5]);
+
+
+
 
     }
 

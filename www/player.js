@@ -5,7 +5,7 @@ Jetman.Player = {
         var x = Jetman.Platforms.map.objects.playerStart[0].x; 
         var y = Jetman.Platforms.map.objects.playerStart[0].y;
         this.flySpeed = 200;
-
+        this.didCollideWithJumpadX = false;
 
         this.sprite =  this.game.add.sprite(x, y, 'player'); 
         this.game.physics.arcade.enable(this.sprite);
@@ -19,8 +19,8 @@ Jetman.Player = {
         this.enableAngleCorrection = false;
         this.sprite.body.bounce.y = 1;
       //  this.sprite.body.bounce.x = 0.5;
-        Jetman.Player.sprite.body.maxVelocity.y= this.flySpeed;
-
+        this.sprite.body.maxVelocity.y= this.flySpeed; 
+         this.sprite.body.drag.x = 100;
         this.isOnJumpPadMomentum = false;
        // this.hasFuel = false;
     },
@@ -42,13 +42,21 @@ Jetman.Player = {
     },
 
     moveRight: function(){
-      //  if(this.sprite.body.blocked.down)
-        this.sprite.body.velocity.x = 50;
+      if(Jetman.Player.didCollideWithJumpadX){
+        if(Jetman.Player.sprite.body.velocity.x <= 0)
+        Jetman.Player.didCollideWithJumpadX= false;
+        return;
+      }
+        this.sprite.body.velocity.x = 70;
     },
 
     moveLeft: function(){
-      //  if(this.sprite.body.blocked.down)
-        this.sprite.body.velocity.x = -50; 
+      if(Jetman.Player.didCollideWithJumpadX){
+        if(Jetman.Player.sprite.body.velocity.x <= 0)
+        Jetman.Player.didCollideWithJumpadX= false;
+        return;
+      }
+        this.sprite.body.velocity.x = -70; 
     },
 
     flyToActivePointer: function(){
@@ -67,7 +75,9 @@ Jetman.Player = {
 
     stop: function(){
         this.sprite.body.allowGravity = true;
-         this.sprite.body.velocity.x = 0;
+
+       // this.sprite.body.velocity.x >= 3 ? this.sprite.body.velocity.x-=3 : this.sprite.body.velocity.x+=3;
+        // this.sprite.body.velocity.x = 0;
         // if(this.sprite.body.blocked.down){
         //     this.sprite.body.velocity.x = 0;
         // }
