@@ -12,8 +12,10 @@ Jetman.Platforms = {
 
 
   onPlatformCollision: function (playerObj, platform){
-    Jetman.Player.startAnglingUpright();
-   // Jetman.Player.isOnJumpPadMomentum = false;
+    //debugger;
+    if(playerObj.body.blocked.down){
+      Jetman.Player.startAnglingUpright();
+    }
     
   },
 
@@ -33,8 +35,10 @@ Jetman.Platforms = {
     Jetman.Player.death();
   },
 
-  onWallColide : function(){
-
+  onWallColide : function(playerObj){
+    if(playerObj.body.blocked.down){
+      Jetman.Player.startAnglingUpright();
+    }
   },
 
   onFireballPlatformOverlap: function (fireBallObj, tileCollide){

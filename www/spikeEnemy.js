@@ -55,10 +55,6 @@ Jetman.SpikeEnemies = {
 					} else {
 						this.body.velocity.x = this.moveSpeed;
 					}
-					//if(sprite)
-					
-					//this.sprite.children[0].rotation = this.sprite.children[0].angleToXY(Jetman.Player.centerX, Jetman.Player.centerY);
-					return;
 			}
 
 		}
@@ -69,17 +65,14 @@ Jetman.SpikeEnemies = {
 		}	
 
 		this.sprite.rotateEye = function(game ){
-			//console.log(game.physics.arcade.angleToXY(this, Jetman.Player.sprite.centerX, Jetman.Player.sprite.centerY));
-			//this.eye.world.x +=30;
-			//this.eye.world.y -=100; 
 			this.eye.rotation = game.physics.arcade.angleToXY({x:this.eye.world.x,y:this.eye.world.y}, Jetman.Player.sprite.centerX, Jetman.Player.sprite.centerY);
 			this.eye.rotation+=89.5;
-			x = this.eye.world.x;
-			y = this.eye.world.y;
-			//this.	eye.rotation = 1.5;
 		}
 
-		this.attachEye(game);
+		if(this.sprite.type === Jetman.SpikeEnemyTypes.FOLLOW){
+			this.attachEye(game);
+		}
+		
 
 
 		return this.sprite;

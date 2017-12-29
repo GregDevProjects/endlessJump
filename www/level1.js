@@ -52,18 +52,7 @@ Jetman.Level1.prototype = {
      // this.game.debug.pointer(this.game.input.activePointer);
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       this.game.debug.text(Jetman.Player.fuel, 32,200);
-    //         this.game.debug.text("Time until event: " + this.game.time.events.duration.toFixed(0), 32, 32);
-    // this.game.debug.text("Next tick: " + this.game.time.events.next.toFixed(0), 32, 64);
-       // this.game.debug.body(Jetman.Player.sprite);
-        //this.game.debug.spriteInfo(Jetman.Player.sprite, 32, 32);
 
-     // Jetman.SpikeEnemies.group.forEach( this.game.debug.body);
-     //if(typeof x != undefined){
-     this.game.debug.pixel( Jetman.SpikeEnemies.group.children[5].eye.world.x +100, Jetman.SpikeEnemies.group.children[5].eye.world.y + 100, 'rgb(0,92,92)' );
-      
-        this.game.debug.text(Jetman.SpikeEnemies.group.children[5].eye.world.x, Jetman.SpikeEnemies.group.children[5].eye.world.y,'TEST');
-
-        this.game.debug.text(Jetman.SpikeEnemies.group.children[5].y + '  ' + Jetman.SpikeEnemies.group.children[5].eye.world.y,32,300);
 
     }
 
