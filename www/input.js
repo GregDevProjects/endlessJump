@@ -22,6 +22,7 @@ Jetman.Input = {
 	    var tapPositionX = game.input.activePointer.x  + game.camera.x;
 	    if (playerMiddle - 5 <= tapPositionX && playerMiddle + 5 >= tapPositionX){
 	        Jetman.Player.stop();
+
 	        return;
 	    }
 

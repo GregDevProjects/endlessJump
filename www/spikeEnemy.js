@@ -79,7 +79,7 @@ Jetman.SpikeEnemies = {
 	},
 
 	onPlayerSpikeEnemyOverlap: function(){
-		//Jetman.Player.death();
+		Jetman.Player.death();
 	},
 
 	onSpikedEnemyPlatformOverlap: function(spikeEnemy, platform){
@@ -93,6 +93,7 @@ Jetman.SpikeEnemies = {
 		
 	},
 	
+	//this is wierd 
 	nameToEnum: function(tileObjName){
 		switch(tileObjName){
 			case 'rightToLeft': 

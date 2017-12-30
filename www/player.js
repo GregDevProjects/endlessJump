@@ -1,6 +1,6 @@
 Jetman.Player = {
     initPlayer: function(game){
-        firstrun = true;
+        // firstrun = true;
         this.game = game;
         var x = Jetman.Platforms.map.objects.playerStart[0].x; 
         var y = Jetman.Platforms.map.objects.playerStart[0].y;
@@ -76,11 +76,6 @@ Jetman.Player = {
     stop: function(){
         this.sprite.body.allowGravity = true;
 
-       // this.sprite.body.velocity.x >= 3 ? this.sprite.body.velocity.x-=3 : this.sprite.body.velocity.x+=3;
-        // this.sprite.body.velocity.x = 0;
-        // if(this.sprite.body.blocked.down){
-        //     this.sprite.body.velocity.x = 0;
-        // }
     },
 
     anglePlayerToPointer: function() {
@@ -103,7 +98,7 @@ Jetman.Player = {
         }
 
      
-            this.handleJumpPadSpin();
+        this.handleJumpPadSpin();
         
 
 
