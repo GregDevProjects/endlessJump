@@ -1,60 +1,64 @@
 //Jetman.Platforms = function(){};
 Jetman.Platforms = {
 
-  initGroups: function(game){
-      this.fuelXl = game.add.group();
-      this.fuelXl.enableBody = true;
+    TileIndexes: {
+        PLATFORM: 1,
+        LAVA: 2,
+        SPIKES: 3
+    },
 
-      this.fireball = game.add.group();
-      this.fireball.enableBody = true;
+    initGroups: function(game) {
+        this.fireball = game.add.group();
+        this.fireball.enableBody = true;
 
     },
 
 
-  onPlatformCollision: function (playerObj, platform){
-    Jetman.Player.startAnglingUpright();
-    
-  },
+    onTileCollision: function(playerObj, platform) {
+        //might be better to create seprate layers for this kind of stuff
+        switch (platform.index) {
+            case Jetman.Platforms.TileIndexes.PLATFORM:
+                if (playerObj.body.blocked.down) {
+                    Jetman.Player.startAnglingUpright();
+                }
+                return;
+            case Jetman.Platforms.TileIndexes.LAVA:
+                Jetman.Player.death();
+                return;
+            case Jetman.Platforms.TileIndexes.SPIKES:
+                if (playerObj.body.blocked.up) {
+                    Jetman.Player.death();
+                }   
+        }
 
-  onDeathLayerCollide: function (playerObj, killObject){
-    Jetman.Player.death();
-  },
+    },
 
-  onLavaCollide: function (playerObj, killObject){
-   Jetman.Player.death();
-  },
+    onFireballPlayerOverlap: function(playerObj, fireballObj) {
+        Jetman.Player.death();
+    },
 
-  onSpikesCollide: function (playerObj, killObject){
-     Jetman.Player.death();
-  },
+    onFireballPlatformOverlap: function(fireBallObj, tileCollide) {
+        //debugger;
+        if (tileCollide.index === 1) {
+            fireBallObj.kill();
+            //fireBallObj.destroy();
+        }
 
-  onFireballPlayerOverlap: function (playerObj, fireballObj){
-    Jetman.Player.death();
-  },
+    },
+    //init level 1 
+    initTileMap: function(game) {
+        //WASH ME
+        this.game = game;
 
-  onFireballPlatformOverlap: function (fireBallObj, tileCollide){
-    //debugger;
-    if(tileCollide.index === 1){
-      fireBallObj.kill();
-      //fireBallObj.destroy();
-    }  
+        this.map = game.add.tilemap('mapName');
 
-  },    
-  //init level 1 
-  initTileMap: function(game) {
-      //WASH ME
-      this.game = game;
+        this.map.addTilesetImage('fuel', 'platform');
+        this.map.addTilesetImage('deathTiles', 'deathTiles');
 
-      this.map = game.add.tilemap('mapName');    
-     // this.addGidToObjects(); 
-      this.map.addTilesetImage('fuel', 'platform');    
-     
-      this.map.addTilesetImage('deathTiles', 'deathTiles');  
-      this.platforms = this.map.createLayer('platforms');    
-      this.map.setTileIndexCallback(3, Jetman.Platforms.onSpikesCollide, this);
-      this.map.setTileIndexCallback(2, Jetman.Platforms.onLavaCollide, this); 
-      this.map.setCollision(1);
-      this.platforms.resizeWorld();
+        this.platforms = this.map.createLayer('platforms');
+
+        this.map.setCollision([1, 2, 3], true, 0);
+        this.platforms.resizeWorld();
     }
 
 }

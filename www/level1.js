@@ -5,6 +5,8 @@ Jetman.Level1.prototype = {
       this.game.time.advancedTiming = true;
       this.game.stage.backgroundColor = 0xcc7b09;
 
+      
+
       Jetman.Platforms.initGroups(this.game);
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
@@ -12,6 +14,7 @@ Jetman.Level1.prototype = {
       //TODO: new object for map 
       Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
       Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
+      Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
     },
 
     update: function() {
@@ -20,9 +23,15 @@ Jetman.Level1.prototype = {
 
       this.game.physics.arcade.overlap(Jetman.Platforms.fireball, Jetman.Platforms.platforms, Jetman.Platforms.onFireballPlatformOverlap);
 
-      this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformCollision, null, this); 
+      //tile collisions 
+      this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onTileCollision, null, this); 
 
-      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Fuel.group, Jetman.Fuel.onFuelOverlap, null, this);
+
+      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
+
+       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Fuel.group, Jetman.Fuel.onFuelOverlap, null, this);
+
+
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.SpikeEnemies.group, Jetman.SpikeEnemies.onPlayerSpikeEnemyOverlap);
 
@@ -33,6 +42,7 @@ Jetman.Level1.prototype = {
       });
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
+
       Jetman.Player.angleUpright();
       
     },
@@ -42,12 +52,11 @@ Jetman.Level1.prototype = {
      // this.game.debug.pointer(this.game.input.activePointer);
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       this.game.debug.text(Jetman.Player.fuel, 32,200);
-    //         this.game.debug.text("Time until event: " + this.game.time.events.duration.toFixed(0), 32, 32);
-    // this.game.debug.text("Next tick: " + this.game.time.events.next.toFixed(0), 32, 64);
-       // this.game.debug.body(Jetman.Player.sprite);
-        //this.game.debug.spriteInfo(Jetman.Player.sprite, 32, 32);
 
-     // Jetman.SpikeEnemies.group.forEach( this.game.debug.body);
+    //  this.game.debug.body(Jetman.JumpPad.group.children[5]);
+
+
+
 
     }
 
