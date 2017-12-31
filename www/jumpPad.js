@@ -25,35 +25,21 @@ Jetman.JumpPad = {
     }
 
     map.createFromObjects('jumpPad', 5,'jumpPadUp',0,true,false,this.group, Phaser.Sprite, false, false);
-
     map.createFromObjects('jumpPad', 6,'jumpPadUp',0,true,false,this.group, Phaser.Sprite, false, false);
-   // debugger;
-      this.group.callAll('animations.add', 'animations', 'motion', null, 60, true);
-      this.group.callAll('animations.play', 'animations', 'motion');
+    this.group.callAll('animations.add', 'animations', 'motion', null, 60, true);
+    this.group.callAll('animations.play', 'animations', 'motion');
 
 	},
 
   onPlayerOverlap: function(player, jumpPad){
-
-     // debugger;
       switch (jumpPad.name){
         case "up":
-          Jetman.Player.sprite.body.maxVelocity.y = Jetman.JumpPad.VelocityChange.UP.y;
-          Jetman.Player.sprite.body.velocity.y = -Jetman.JumpPad.VelocityChange.UP.y;
+          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
           break;
         case "upRight":
-         Jetman.Player.sprite.body.maxVelocity.y = Jetman.JumpPad.VelocityChange.UP_RIGHT.y;
-         Jetman.Player.sprite.body.velocity.y = -Jetman.JumpPad.VelocityChange.UP_RIGHT.y;
-          Jetman.Player.sprite.body.velocity.x = Jetman.JumpPad.VelocityChange.UP_RIGHT.x;
-          Jetman.Player.didCollideWithJumpadX = true;
-        // this.game.physics.arcade.velocityFromAngle(45, 300, Jetman.Player.sprite.body.velocity)
+          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
           break;
-          
-
       }
-
-      Jetman.Player.isOnJumpPadMomentum = true;
-     // debugger;
   }
 
 

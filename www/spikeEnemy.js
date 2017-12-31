@@ -12,6 +12,8 @@ Jetman.SpikeEnemies = {
 		this.group = this.game.add.group();
 		this.group.name ='SpikeEnemies';
 		this.group.enableBody = true;
+		this.buttonGroup = this.game.add.group();
+		this.buttonGroup.enableBody = true;
 
 		for (var i=0;i<map.objects.spikeEnemy.length;i++) {
 			this.group.add(
@@ -24,7 +26,7 @@ Jetman.SpikeEnemies = {
 
 			);
 		}	
-
+				
 	},	
 
 	SpikedEnemy: function(SpikeEnemyType,x,y,game){
@@ -64,21 +66,35 @@ Jetman.SpikeEnemies = {
 			this.sprite.eye.anchor.setTo(0.5, 0.5);
 		}	
 
+		this.attachButton = function(game){
+			var button = this.sprite.addChild(game.make.sprite(0, -10, 'button')); 
+			game.physics.enable(button, Phaser.Physics.ARCADE);
+			button.body.moves = false
+			//button.enableBody = true;
+			//Jetman.SpikeEnemies.buttonGroup.add(button);
+			this.sprite.button = button;
+		}
+
 		this.sprite.rotateEye = function(game ){
 			this.eye.rotation = game.physics.arcade.angleToXY({x:this.eye.world.x,y:this.eye.world.y}, Jetman.Player.sprite.centerX, Jetman.Player.sprite.centerY);
 			this.eye.rotation+=89.5;
 		}
 
-		if(this.sprite.type === Jetman.SpikeEnemyTypes.FOLLOW){
-			this.attachEye(game);
+		this.init = function(game){
+			this.attachButton(game);
+			if(this.sprite.type === Jetman.SpikeEnemyTypes.FOLLOW){
+				this.attachEye(game);
+			}
 		}
-		
+
+		this.init(game);
 
 
 		return this.sprite;
 	},
 
-	onPlayerSpikeEnemyOverlap: function(){
+	onPlayerSpikeEnemyOverlap: function(player, spikeEnemy){
+		//debugger;
 		Jetman.Player.death();
 	},
 
@@ -91,6 +107,16 @@ Jetman.SpikeEnemies = {
 			spikeEnemy.moveSpeed = -spikeEnemy.moveSpeed;
 		}  
 		
+	},
+
+	onButtonOverlap: function(player, button){
+		if(!button.body.touching.up){
+			return;
+		}
+
+		Jetman.Player.applySuddenVelocity(0,-300);
+		button.parent.kill();
+		button.kill();
 	},
 	
 	//this is wierd 
