@@ -38,6 +38,10 @@ Jetman.Level1.prototype = {
       Jetman.Input.dragControl(this.game);
       //spike enemy code 
       Jetman.SpikeEnemies.group.forEach(function(aSpikedEnemy){
+       
+        if(aSpikedEnemy.children[0].key === "button"){
+          aSpikedEnemy.game.physics.arcade.collide(Jetman.Player.sprite, aSpikedEnemy.children[0], Jetman.SpikeEnemies.onButtonOverlap, null, this); 
+        }
         aSpikedEnemy.move();
       });
 

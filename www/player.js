@@ -30,15 +30,10 @@ Jetman.Player = {
         this.game.camera.flash(0xff0000, 500);
         this.sprite.kill();
 
-        var x = Jetman.Platforms.map.objects.playerStart[0].x; 
-        var y = Jetman.Platforms.map.objects.playerStart[0].y;
-        this.sprite.x = x;
-        this.sprite.y = y;
-        this.sprite.body.allowGravity = true;
-        this.sprite.body.velocity.set(0);
-        this.sprite.revive(x,y);
-      //  this.game.camera.targetOffset.set(0);
-        this.game.camera.follow(this.sprite);    
+        this.game.camera.onFlashComplete.add(function() {
+          this.game.state.restart();
+        }, this);
+        
     },
 
     moveRight: function(){
@@ -78,6 +73,17 @@ Jetman.Player = {
 
     },
 
+    applySuddenVelocity: function(xVelocity, yVelocity){
+        this.sprite.body.allowGravity = true;
+        this.sprite.body.maxVelocity.y = -yVelocity;
+        this.sprite.body.velocity.y = yVelocity;
+        this.sprite.body.velocity.x = xVelocity;
+        this.isOnJumpPadMomentum = true;
+        if(xVelocity > 0 || xVelocity < 0) {
+            Jetman.Player.didCollideWithJumpadX = true;
+        }
+    },
+
     anglePlayerToPointer: function() {
       this.sprite.rotation = this.game.physics.arcade.angleToPointer(Jetman.Player.sprite, this.game.input.activePointer);
       this.sprite.angle += 95;
@@ -97,11 +103,7 @@ Jetman.Player = {
             
         }
 
-     
         this.handleJumpPadSpin();
-        
-
-
     },
 
     startAnglingUpright: function(){
