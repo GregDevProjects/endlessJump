@@ -30,7 +30,8 @@ Jetman.Level1.prototype = {
 
       this.game.physics.arcade.collide(Jetman.Walker.group, Jetman.Platforms.platforms);
 
-      this.game.physics.arcade.collide(Jetman.Walker.group, Jetman.Walker.boundryGroup);
+      this.game.physics.arcade.collide(Jetman.Walker.group, Jetman.Platforms.boundries);
+
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
 
@@ -54,6 +55,9 @@ Jetman.Level1.prototype = {
       Jetman.Walker.group.forEach(function(aWalker){
        
         aWalker.move(aWalker);
+        aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker.button, aWalker.onButtonOverlap, null, this); 
+        aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker, aWalker.onPlayerCollision, null, this); 
+
       });
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);

@@ -13,7 +13,8 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('spikeEnemy', 'img/spikeEnemy.png');
                 this.game.load.image('spikeEnemyEye', 'img/spikeEnemyEye.png');
                 this.game.load.image('button', 'img/button.png');
-
+                this.game.load.image('invisible', 'img/invisible.png');
+                this.game.load.image('walker', 'img/walker.png');
                 this.game.load.spritesheet('jumpPadUp', 'img/jumpPadUp.png',30, 30, 17); 
 
                 this.game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
