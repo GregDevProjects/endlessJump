@@ -18,18 +18,18 @@ Jetman.Player = {
         this.fuel = 0;
         this.enableAngleCorrection = false;
         this.sprite.body.bounce.y = 1;
-      //  this.sprite.body.bounce.x = 0.5;
         this.sprite.body.maxVelocity.y= this.flySpeed; 
-         this.sprite.body.drag.x = 100;
+        this.sprite.body.drag.x = 100;
         this.isOnJumpPadMomentum = false;
-       // this.hasFuel = false;
+        this.currentComboCounter = 0;
+        this.maxCombo = 0;
     },
 
     death: function(){
         this.game.camera.target = null;
         this.game.camera.flash(0xff0000, 500);
         this.sprite.kill();
-
+        this.resetCombo();
         this.game.camera.onFlashComplete.add(function() {
           this.game.state.restart();
         }, this);
@@ -120,7 +120,27 @@ Jetman.Player = {
             Jetman.Player.sprite.body.maxVelocity.y= this.flySpeed;
             this.startAnglingUpright();
         }       
-    }
+    },
+
+    incrementCombo: function(){
+        this.currentComboCounter+=1;
+        if(this.currentComboCounter < 2){
+            return;
+        }
+        if(this.currentComboCounter > this.maxCombo){
+            this.maxCombo = this.currentComboCounter;
+        }
+        Jetman.Text.displayRiseAndFadeOutText(
+            this.sprite.centerX - 50, 
+            this.sprite.y, 
+            this.currentComboCounter + " COMBO", 
+            this.game
+        );
+    },
+
+    resetCombo: function(){
+         this.currentComboCounter = 0;
+    }    
 
 }
 

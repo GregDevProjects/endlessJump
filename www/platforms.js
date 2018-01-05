@@ -19,6 +19,7 @@ Jetman.Platforms = {
         switch (platform.index) {
             case Jetman.Platforms.TileIndexes.PLATFORM:
                 if (playerObj.body.blocked.down) {
+                    Jetman.Player.resetCombo();
                     Jetman.Player.startAnglingUpright();
                 }
                 return;
