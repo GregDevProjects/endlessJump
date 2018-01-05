@@ -55,9 +55,20 @@ Jetman.Platforms = {
         this.map.addTilesetImage('fuel', 'platform');
         this.map.addTilesetImage('deathTiles', 'deathTiles');
 
-        this.platforms = this.map.createLayer('platforms');
+        this.map.addTilesetImage('invisible', 'invisible');
 
+         this.platforms = this.map.createLayer('platforms');
+
+        this.boundries = this.map.createLayer('invisible');
+
+         this.boundries.enableBody = true;
+
+       // this.boundries.debug = true;
+
+this.game.physics.arcade.enable(this.boundries, Phaser.Physics.ARCADE, true);
+        
         this.map.setCollision([1, 2, 3], true, 0);
+        this.map.setCollision(4, true, 1);
         this.platforms.resizeWorld();
     }
 

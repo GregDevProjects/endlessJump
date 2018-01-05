@@ -113,7 +113,8 @@ Jetman.SpikeEnemies = {
 		if(!button.body.touching.up){
 			return;
 		}
-
+		Jetman.Player.fuel += 200;
+		//Jetman.Player.fuel =200;
 		Jetman.Player.applySuddenVelocity(0,-300);
 		button.parent.kill();
 		button.kill();
