@@ -44,16 +44,6 @@ Jetman.Walker = {
 //this.sprite.body.collideWorldBounds=true;
 	},
 
-  onPlayerOverlap: function(player, jumpPad){
-      switch (jumpPad.name){
-        case "up":
-          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
-          break;
-        case "upRight":
-          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
-          break;
-      }
-  },
 
   move: function(sprite){
     
@@ -86,6 +76,7 @@ Jetman.Walker = {
         return;
     }
 
+    Jetman.Player.incrementCombo();
     Jetman.Player.fuel += 150;
     Jetman.Player.applySuddenVelocity(0,-300);
     button.parent.kill();

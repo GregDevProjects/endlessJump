@@ -114,6 +114,7 @@ Jetman.SpikeEnemies = {
 			return;
 		}
 		Jetman.Player.fuel += 200;
+		Jetman.Player.incrementCombo();
 		//Jetman.Player.fuel =200;
 		Jetman.Player.applySuddenVelocity(0,-300);
 		button.parent.kill();
