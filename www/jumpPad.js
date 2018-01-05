@@ -11,7 +11,6 @@ Jetman.JumpPad = {
 
 
     for (var i=0;i<map.objects.jumpPad.length;i++) {
-      map.objects.fuel[i].properties = {};
       switch (map.objects.jumpPad[i].name) {
         case "up" :  
          map.objects.jumpPad[i].gid = 5;
