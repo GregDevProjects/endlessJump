@@ -22,6 +22,7 @@ Jetman.Player = {
         this.sprite.body.drag.x = 100;
         this.isOnJumpPadMomentum = false;
         this.currentComboCounter = 0;
+        this.maxCombo = 0;
     },
 
     death: function(){
@@ -126,23 +127,19 @@ Jetman.Player = {
         if(this.currentComboCounter < 2){
             return;
         }
-        var style = { font: "40px Arial", fill: "#ff0044", align: "center" };
-        var myText =  this.game.add.text(this.sprite.centerX - 50, this.sprite.y, this.currentComboCounter + " COMBO");
-       // this.game.time.events.add(1000, function() {
-            this.game.add.tween(myText).to({
-                y: this.sprite.y -100
-            }, 1000, Phaser.Easing.Linear.None, true);
-            this.game.add.tween(myText).to({
-                alpha: 0
-            }, 1000, Phaser.Easing.Linear.None, true);
-       // }, this);
-
-        console.log(this.currentComboCounter);
+        if(this.currentComboCounter > this.maxCombo){
+            this.maxCombo = this.currentComboCounter;
+        }
+        Jetman.Text.displayRiseAndFadeOutText(
+            this.sprite.centerX - 50, 
+            this.sprite.y, 
+            this.currentComboCounter + " COMBO", 
+            this.game
+        );
     },
 
     resetCombo: function(){
          this.currentComboCounter = 0;
-         console.log(this.currentComboCounter);
     }    
 
 }

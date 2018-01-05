@@ -65,8 +65,8 @@ Jetman.Level1.prototype = {
     render: function() {
      // this.game.debug.pointer(this.game.input.activePointer);
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
-      this.game.debug.text(Jetman.Player.fuel, 32,200);
-
+      this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
+      this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
     //  this.game.debug.body(Jetman.JumpPad.group.children[5]);
 
 
