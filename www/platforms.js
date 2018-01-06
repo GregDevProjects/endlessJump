@@ -2,9 +2,8 @@
 Jetman.Platforms = {
 
     TileIndexes: {
-        PLATFORM: 1,
-        LAVA: 2,
-        SPIKES: 3
+        LAVA: 1,
+        SPIKES: 2
     },
 
     initGroups: function(game) {
@@ -14,15 +13,19 @@ Jetman.Platforms = {
     },
 
 
-    onTileCollision: function(playerObj, platform) {
-        //might be better to create seprate layers for this kind of stuff
-        switch (platform.index) {
-            case Jetman.Platforms.TileIndexes.PLATFORM:
-                if (playerObj.body.blocked.down) {
-                    Jetman.Player.resetCombo();
-                    Jetman.Player.startAnglingUpright();
-                }
-                return;
+    onPlatformLayerCollision: function(playerObj, platform) {
+
+        if (playerObj.body.blocked.down) {
+            Jetman.Player.resetCombo();
+            Jetman.Player.startAnglingUpright();
+        }   
+        
+
+    },
+
+    onDeathLayerCollision: function(playerObj, deathTile){
+      //  debugger;
+        switch (deathTile.index) {
             case Jetman.Platforms.TileIndexes.LAVA:
                 Jetman.Player.death();
                 return;
@@ -31,7 +34,6 @@ Jetman.Platforms = {
                     Jetman.Player.death();
                 }   
         }
-
     },
 
     onFireballPlayerOverlap: function(playerObj, fireballObj) {
@@ -48,39 +50,40 @@ Jetman.Platforms = {
     },
     //init level 1 
     initTileMap: function(game) {
-        //WASH ME
-
-        // this.group = this.game.add.group();
-        // this.group.enableBody = true;
-        // this.game = game;
-
         this.map = game.add.tilemap('mapName');
 
-       this.map.addTilesetImage('fuel', 'platform');
-        this.map.addTilesetImage('deathTiles', 'deathTiles');
 
-        this.map.addTilesetImage('invisible', 'invisible');
 
-        this.map.addTilesetImage( 'platform_rock','rockPlatforms' )
+        this.addTilesetImages(game);
+        this.createLayers(game);
 
-       // this.platforms = this.map.createLayer('rockPlatforms');
-
-        this.platforms = this.map.createLayer('platforms');
-       
-        this.boundries = this.map.createLayer('invisible');
-
-         this.boundries.enableBody = true;
-
-       // this.boundries.debug = true;
+        this.boundries.enableBody = true;
+         this.death.enableBody = true;
 
         game.physics.arcade.enable(this.boundries, Phaser.Physics.ARCADE, true);
         
-       // this.map.setCollision([1,4,5,6,7,9,10,11], true, this.platforms);
+        this.setTileCollisions();
 
-         this.map.setCollisionBetween(5, 11, true, this.platforms);
-        this.map.setCollision(4, true, this.boundries);
         this.platforms.resizeWorld();
         
+    },
+
+    createLayers: function(){
+        this.platforms = this.map.createLayer('platforms');  
+        this.boundries = this.map.createLayer('invisible');   
+        this.death = this.map.createLayer('death'); 
+    },
+
+    addTilesetImages: function(){
+        this.map.addTilesetImage('deathTiles', 'deathTiles');
+        this.map.addTilesetImage('invisible', 'invisible');
+        this.map.addTilesetImage( 'platform_rock','rockPlatforms');
+    },
+
+    setTileCollisions: function(){
+        this.map.setCollisionBetween(4, 10, true, this.platforms);
+        this.map.setCollision(3, true, this.boundries);
+        this.map.setCollision([1,2], true, this.death);  
     }
 
 }

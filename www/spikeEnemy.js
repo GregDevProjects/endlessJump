@@ -99,9 +99,6 @@ Jetman.SpikeEnemies = {
 	},
 
 	onSpikedEnemyPlatformOverlap: function(spikeEnemy, platform){
-		if(platform.index !==1){
-			return;
-		}
 		if (spikeEnemy.type === Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT ||
 			spikeEnemy.type === Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT) {
 			spikeEnemy.moveSpeed = -spikeEnemy.moveSpeed;

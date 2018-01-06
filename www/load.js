@@ -5,9 +5,11 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('player', 'img/playerProto_m.png');
                 this.game.load.image('ground', 'img/ground.png');
                 this.game.load.image('bg', 'img/cave.png');
+
                 this.game.load.image('fuelLow', 'img/low_m.png');
                 this.game.load.image('fuelMed', 'img/med.png'); 
                 this.game.load.image('fuelHigh', 'img/high.png');
+
                 this.game.load.image('jetParticle', 'img/jetParticle.png')
                 this.game.load.image('deathTiles', 'img/deathTiles_m.png');
                 this.game.load.image('spikeEnemy', 'img/spikeEnemy.png');
@@ -21,6 +23,7 @@ Jetman.PreLoad.prototype = {
 
                 this.game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
                 this.game.load.spritesheet('fireball','img/fireBall.png',116.333,168,7);
+                
                 this.game.load.tilemap('mapName', 'tilemaps/test3.json', null, Phaser.Tilemap.TILED_JSON);
         },
 
