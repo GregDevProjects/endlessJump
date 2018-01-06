@@ -3,19 +3,23 @@ Jetman.Level1.prototype = {
 	  create :function() {  
       this.game.renderer.renderSession.roundPixels = true;
       this.game.time.advancedTiming = true;
-      this.game.stage.backgroundColor = 0xcc7b09;
-
-      
+     // this.game.stage.backgroundColor = 0xE7E3E2;
+      var sprite = this.game.add.tileSprite(0, 0, 360, 9600, 'bg');
+       
 
       Jetman.Platforms.initGroups(this.game);
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
+       Jetman.Player.fuel = 10000;
       Jetman.Walker.init(Jetman.Platforms.map,this.game);
       //TODO: new object for map 
       Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
      // Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
       Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
+
+     
+      // debugger;
     },
 
     update: function() {

@@ -49,28 +49,38 @@ Jetman.Platforms = {
     //init level 1 
     initTileMap: function(game) {
         //WASH ME
-        this.game = game;
+
+        // this.group = this.game.add.group();
+        // this.group.enableBody = true;
+        // this.game = game;
 
         this.map = game.add.tilemap('mapName');
 
-        this.map.addTilesetImage('fuel', 'platform');
+       this.map.addTilesetImage('fuel', 'platform');
         this.map.addTilesetImage('deathTiles', 'deathTiles');
 
         this.map.addTilesetImage('invisible', 'invisible');
 
-         this.platforms = this.map.createLayer('platforms');
+        this.map.addTilesetImage( 'platform_rock','rockPlatforms' )
 
+       // this.platforms = this.map.createLayer('rockPlatforms');
+
+        this.platforms = this.map.createLayer('platforms');
+       
         this.boundries = this.map.createLayer('invisible');
 
          this.boundries.enableBody = true;
 
        // this.boundries.debug = true;
 
-this.game.physics.arcade.enable(this.boundries, Phaser.Physics.ARCADE, true);
+        game.physics.arcade.enable(this.boundries, Phaser.Physics.ARCADE, true);
         
-        this.map.setCollision([1, 2, 3], true, 0);
-        this.map.setCollision(4, true, 1);
+       // this.map.setCollision([1,4,5,6,7,9,10,11], true, this.platforms);
+
+         this.map.setCollisionBetween(5, 11, true, this.platforms);
+        this.map.setCollision(4, true, this.boundries);
         this.platforms.resizeWorld();
+        
     }
 
 }
