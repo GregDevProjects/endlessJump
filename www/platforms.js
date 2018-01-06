@@ -82,7 +82,7 @@ Jetman.Platforms = {
 
     setTileCollisions: function(){
         this.map.setCollisionBetween(4, 10, true, this.platforms);
-        this.map.setCollision(3, true, this.boundries);
+        this.map.setCollision(5, true, this.boundries);
         this.map.setCollision([1,2], true, this.death);  
     }
 

@@ -23,6 +23,8 @@ Jetman.PreLoad.prototype = {
 
                 this.game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
                 this.game.load.spritesheet('fireball','img/fireBall.png',116.333,168,7);
+
+                this.game.load.spritesheet('water','img/ocean_spriteSheet.png',30,30,16);
                 
                 this.game.load.tilemap('mapName', 'tilemaps/test3.json', null, Phaser.Tilemap.TILED_JSON);
         },
