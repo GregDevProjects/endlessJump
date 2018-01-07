@@ -1,25 +1,22 @@
 Jetman.Level1 = function(game){};
 Jetman.Level1.prototype = {
 	  create :function() {  
-      this.game.renderer.renderSession.roundPixels = true;
-      this.game.time.advancedTiming = true;
-     // this.game.stage.backgroundColor = 0xE7E3E2;
-      var sprite = this.game.add.tileSprite(0, 0, 360, 9600, 'bg');
+      // this.game.renderer.renderSession.roundPixels = true;
+      // this.game.time.advancedTiming = true;
        
 
-      Jetman.Platforms.initGroups(this.game);
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
-       Jetman.Player.fuel = 10000;
+      // Jetman.Player.fuel = 10000;
       Jetman.Walker.init(Jetman.Platforms.map,this.game);
       //TODO: new object for map 
       Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
      // Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
       Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
 
-     
-      // debugger;
+      Jetman.Platforms.initBackground(this.game);
+
     },
 
     update: function() {
@@ -40,7 +37,7 @@ Jetman.Level1.prototype = {
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.SpikeEnemies.group, Jetman.SpikeEnemies.onPlayerSpikeEnemyOverlap);
 
-      Jetman.Input.dragControl(this.game);
+    
       //spike enemy code 
       Jetman.SpikeEnemies.group.forEach(function(aSpikedEnemy){
        
@@ -61,6 +58,7 @@ Jetman.Level1.prototype = {
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
 
+        Jetman.Input.dragControl(this.game);
       Jetman.Player.angleUpright();
       
     },
@@ -68,9 +66,9 @@ Jetman.Level1.prototype = {
 
     render: function() {
      // this.game.debug.pointer(this.game.input.activePointer);
-      this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
+      // this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
-      this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
+       this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
     //  this.game.debug.body(Jetman.JumpPad.group.children[5]);
 
 
