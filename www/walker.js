@@ -11,14 +11,7 @@ Jetman.Walker = {
     this.moveSpeed = 20;
     game.physics.arcade.enable(this.group);
 
-    // var walker = function(game){
-    //   this.moveSpeed = 20;
-    // }
-
-   // debugger;
- //   walker.prototype.moveSpeed = this.moveSpeed;
-
-   this.boundryGroup = game.add.group();
+    this.boundryGroup = game.add.group();
     this.boundryGroup.enableBody = true;
     // this.sprite.body.gravity.y = 300;  
     for (var i=0;i<map.objects.walker.length;i++) {
@@ -33,15 +26,9 @@ Jetman.Walker = {
         aWalker.init();
     });
 
-    //MAJOR FAIL
-    //USE INVISIVLE TILE INSTEAD 
-   //  map.createFromObjects('walkerBoundry', 8,'spikeEnemy',0,true,false,this.boundryGroup, Phaser.Sprite, false, false);
-
-
     this.group.setAll('body.gravity.y',1000);
     this.group.setAll('body.collideWorldBounds',true);
     this.boundryGroup.setAll('body.moves',false);
-//this.sprite.body.collideWorldBounds=true;
 	},
 
 
