@@ -11,8 +11,8 @@ Jetman.Walker = {
     this.moveSpeed = 20;
     game.physics.arcade.enable(this.group);
 
-    this.boundryGroup = game.add.group();
-    this.boundryGroup.enableBody = true;
+    // this.boundryGroup = game.add.group();
+    // this.boundryGroup.enableBody = true;
     // this.sprite.body.gravity.y = 300;  
     for (var i=0;i<map.objects.walker.length;i++) {
       map.objects.walker[i].gid = 7;     
@@ -28,28 +28,28 @@ Jetman.Walker = {
 
     this.group.setAll('body.gravity.y',1000);
     this.group.setAll('body.collideWorldBounds',true);
-    this.boundryGroup.setAll('body.moves',false);
+   // this.boundryGroup.setAll('body.moves',false);
 	},
 
 
-  move: function(sprite){
+  // move: function(sprite){
     
-    if(sprite.body.blocked.right || sprite.body.blocked.left ){
-      this.moveSpeed = -this.moveSpeed;
-    }
-    sprite.body.velocity.x = this.moveSpeed;
-   // console.log(this.moveSpeed);
-  },
+  //   if(sprite.body.blocked.right || sprite.body.blocked.left ){
+  //     this.moveSpeed = -this.moveSpeed;
+  //   }
+  //   sprite.body.velocity.x = this.moveSpeed;
+  //  // console.log(this.moveSpeed);
+  // },
 
   walker: function(game){
     this.sprite =  Phaser.Sprite;
-    this.sprite.prototype.moveSpeed = 50;
+    this.sprite.prototype.walkerMoveSpeed = 50;
 
-    this.sprite.prototype.move = function(){
+    this.sprite.prototype.moveWalker = function(){
       if(this.body.blocked.right || this.body.blocked.left ){
-        this.moveSpeed = -this.moveSpeed;
+        this.walkerMoveSpeed = -this.walkerMoveSpeed;
       }
-      this.body.velocity.x = this.moveSpeed;
+      this.body.velocity.x = this.walkerMoveSpeed;
     }
 
     this.sprite.prototype.init = function(){
