@@ -8,8 +8,10 @@ Jetman.Level1.prototype = {
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
-      // Jetman.Player.fuel = 10000;
+       Jetman.Player.fuel = 150;
       Jetman.Walker.init(Jetman.Platforms.map,this.game);
+
+      Jetman.Jumper.init(Jetman.Platforms.map,this.game);
       //TODO: new object for map 
       Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
      // Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
@@ -20,6 +22,18 @@ Jetman.Level1.prototype = {
     },
 
     update: function() {
+
+      //jumper code 
+      this.game.physics.arcade.collide(Jetman.Jumper.group, Jetman.Platforms.platforms);
+      Jetman.Jumper.group.forEach(function(aWalker){
+       
+       aWalker.move();
+          aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker.button, aWalker.onButtonOverlap, null, this); 
+          aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker, aWalker.onPlayerCollision, null, this); 
+       });
+
+
+
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Platforms.fireball, Jetman.Platforms.onFireballPlayerOverlap);
 
@@ -50,7 +64,7 @@ Jetman.Level1.prototype = {
       //walker code
       Jetman.Walker.group.forEach(function(aWalker){
        
-        aWalker.move(aWalker);
+        aWalker.moveWalker();
         aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker.button, aWalker.onButtonOverlap, null, this); 
         aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker, aWalker.onPlayerCollision, null, this); 
 
