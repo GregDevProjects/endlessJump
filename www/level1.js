@@ -5,6 +5,10 @@ Jetman.Level1.prototype = {
       // this.game.time.advancedTiming = true;
        
 
+
+
+
+
       Jetman.Platforms.initTileMap(this.game);
       Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
@@ -18,6 +22,8 @@ Jetman.Level1.prototype = {
       Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
 
       Jetman.Platforms.initBackground(this.game);
+
+
 
     },
 
@@ -43,9 +49,7 @@ Jetman.Level1.prototype = {
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.death, Jetman.Platforms.onDeathLayerCollision, null, this); 
 
-      this.game.physics.arcade.collide(Jetman.Walker.group, Jetman.Platforms.platforms);
 
-      this.game.physics.arcade.collide(Jetman.Walker.group, Jetman.Platforms.boundries);
 
       this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
 
@@ -60,15 +64,7 @@ Jetman.Level1.prototype = {
         }
         aSpikedEnemy.move();
       });
-
-      //walker code
-      Jetman.Walker.group.forEach(function(aWalker){
-       
-        aWalker.moveWalker();
-        aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker.button, aWalker.onButtonOverlap, null, this); 
-        aWalker.game.physics.arcade.collide(Jetman.Player.sprite, aWalker, aWalker.onPlayerCollision, null, this); 
-
-      });
+      
 
       this.game.physics.arcade.collide(Jetman.SpikeEnemies.group, Jetman.Platforms.platforms, Jetman.SpikeEnemies.onSpikedEnemyPlatformOverlap);
 
