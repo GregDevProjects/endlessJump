@@ -1,12 +1,6 @@
 Jetman.Walker = {
 
     init: function(map, game) {
-
-        this.group = game.add.group();
-        this.group.enableBody = true;
-        this.moveSpeed = 20;
-        game.physics.arcade.enable(this.group);
-
         for (var i = 0; i < map.objects.walker.length; i++) {
 
             new Walker(
