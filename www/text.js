@@ -49,6 +49,4 @@ Jetman.Text = {
 		this.displayCenterText(text,game);	
 	}
 
-
-
 }
