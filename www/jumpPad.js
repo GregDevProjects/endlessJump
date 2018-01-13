@@ -6,42 +6,49 @@ Jetman.JumpPad = {
 
 	init: function(map,game){
 
-	  this.group = game.add.group();
-    this.group.enableBody = true;
-
-
     for (var i=0;i<map.objects.jumpPad.length;i++) {
-      switch (map.objects.jumpPad[i].name) {
-        case "up" :  
-         map.objects.jumpPad[i].gid = 5;
-          break;       
-        case "upRight" :
-         map.objects.jumpPad[i].gid = 6;    
-          map.objects.jumpPad[i].properties = {rotation: 45};
-         map.objects.jumpPad[i].properties.anchor = {x:0.5, y:0.5};//.setTo(0.5, 0.5);
-         break;     
-      }
+
+      new JumpPad(
+          map.objects.jumpPad[i].name, 
+          game,
+          map.objects.jumpPad[i].x,
+          map.objects.jumpPad[i].y 
+        );
+    }
+	}
+}
+
+JumpPad = function(name, game, x, y) {
+    Phaser.Sprite.call(this, game, x, y, 'jumpPadUp');
+    this.name = name;
+    //this.enableBody = true;
+    game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
+
+    if(this.name === "upRight"){
+      this.rotation = 45;
+      this.anchor = {x:0.5, y:0.5};
     }
 
-    map.createFromObjects('jumpPad', 5,'jumpPadUp',0,true,false,this.group, Phaser.Sprite, false, false);
-    map.createFromObjects('jumpPad', 6,'jumpPadUp',0,true,false,this.group, Phaser.Sprite, false, false);
-    this.group.callAll('animations.add', 'animations', 'motion', null, 60, true);
-    this.group.callAll('animations.play', 'animations', 'motion');
+    this.animations.add('motion', null, 60, true);
+    this.animations.play('motion');
 
-	},
-
-  onPlayerOverlap: function(player, jumpPad){
+    this.onPlayerOverlap = function(player, jumpPad){
       switch (jumpPad.name){
-        case "up":
-          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
-          break;
-        case "upRight":
-          Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
-          break;
-      }
+      case "up":
+      Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
+      break;
+      case "upRight":
+      Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
+      break;
+    }
   }
+   game.add.existing(this);
+}
 
 
+JumpPad.prototype = Object.create(Phaser.Sprite.prototype);
+JumpPad.prototype.constructor = JumpPad;
 
-};
-
+JumpPad.prototype.update = function() {
+  this.game.physics.arcade.overlap(Jetman.Player.sprite, this, this.onPlayerOverlap);
+}

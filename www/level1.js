@@ -28,7 +28,7 @@ Jetman.Level1.prototype = {
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.death, Jetman.Platforms.onDeathLayerCollision, null, this); 
 
-      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.JumpPad.group, Jetman.JumpPad.onPlayerOverlap, null, this);
+      
       Jetman.Input.dragControl(this.game);
       Jetman.Player.angleUpright();
       
