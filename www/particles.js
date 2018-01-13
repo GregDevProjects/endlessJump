@@ -26,6 +26,7 @@ Jetman.Particles = {
     },
 
     stopJetpackParticleFlare: function(){
+    	// debugger;
     	this.emitter.on = false;
     }
 

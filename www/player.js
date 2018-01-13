@@ -72,7 +72,9 @@ Jetman.Player = {
     stop: function(){
         Jetman.Particles.stopJetpackParticleFlare();
         this.sprite.body.allowGravity = true;
-
+        if(this.fuel <= 0){
+            this.sprite.body.velocity.x = 0;
+        }   
     },
 
     applySuddenVelocity: function(xVelocity, yVelocity){
