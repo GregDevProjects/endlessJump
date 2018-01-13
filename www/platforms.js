@@ -70,7 +70,10 @@ Jetman.Platforms = {
          //this.bg =  this.map.createLayer('bg'); 
         this.platforms = this.map.createLayer('platforms');  
        this.boundries = this.map.createLayer('invisible');   
+       this.boundries.visible = false;
        this.death = this.map.createLayer('death');
+
+    
       
     },
 
@@ -85,6 +88,7 @@ Jetman.Platforms = {
     setTileCollisions: function(){
         this.map.setCollisionBetween(12, 18, true, this.platforms);
        this.map.setCollision(11, true, this.boundries);
+
        this.map.setCollision([2,5,10], true, this.death);  
     },
 
