@@ -22,7 +22,6 @@ Jetman.Level1.prototype = {
 
     update: function() {
 
-      this.game.physics.arcade.overlap(Jetman.Player.sprite, Jetman.Platforms.fireball, Jetman.Platforms.onFireballPlayerOverlap);
 
       //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 

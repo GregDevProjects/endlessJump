@@ -10,7 +10,6 @@ Jetman.Player = {
         this.sprite =  this.game.add.sprite(x, y, 'player'); 
         this.game.physics.arcade.enable(this.sprite);
         this.sprite.body.allowGravity = true;
-        this.sprite.body.collideWorldBounds=true;
         this.sprite.body.gravity.y = 300;    
         this.game.camera.follow(this.sprite);
         this.game.camera.targetOffset.y = -game.height/4;

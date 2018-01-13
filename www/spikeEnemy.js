@@ -18,9 +18,10 @@ Jetman.SpikeEnemies = {
 
 
             }
-        }
-        //this is wierd 
-    ,nameToEnum: function(tileObjName) {
+        },
+
+    //this is wierd 
+    nameToEnum: function(tileObjName) {
         switch (tileObjName) {
             case 'rightToLeft':
                 return 1;
