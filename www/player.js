@@ -57,18 +57,20 @@ Jetman.Player = {
     flyToActivePointer: function(){
         if(this.fuel <= 0 || this.isOnJumpPadMomentum){
             this.sprite.body.allowGravity = true;
+            Jetman.Particles.stopJetpackParticleFlare();
             return false;
         }
         this.enableAngleCorrection = false;
         Jetman.Player.sprite.body.allowGravity = false; 
         this.game.physics.arcade.moveToPointer(Jetman.Player.sprite, this.flySpeed, this.game.input.activePointer, 0);
         Jetman.Player.anglePlayerToPointer();
-        Jetman.Particles.jetpackParticleFlare();
+        Jetman.Particles.startJetpackParticleFlare();
         this.fuel--;
         return true;
     },
 
     stop: function(){
+        Jetman.Particles.stopJetpackParticleFlare();
         this.sprite.body.allowGravity = true;
 
     },
