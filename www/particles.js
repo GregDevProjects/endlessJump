@@ -16,6 +16,7 @@ Jetman.Particles = {
 	},
 
 	jetpackParticleFlare: function(){
+		return;
 		this.emitter.y = Jetman.Player.sprite.centerY;
 		this.emitter.x =  Jetman.Player.sprite.centerX;
 		this.emitter.emitX =  Jetman.Player.sprite.centerX;
