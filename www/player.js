@@ -25,6 +25,7 @@ Jetman.Player = {
     },
 
     death: function(){
+      //  return;
         Jetman.Text.displayDeathText(this.game);
         this.game.camera.target = null;
         this.game.camera.flash(0xff0000, 500);
