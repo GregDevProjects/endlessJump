@@ -2,24 +2,33 @@
 Jetman.Platforms = {
 
     TileIndexes: {
-        LAVA: 5,
-        SPIKES_UP: 10,
-        SPIKES_DOWN: 2
+        LAVA: 14,
+        SPIKES_UP: 9,
+        SPIKES_DOWN: 8
     },
 
 
     onPlatformLayerCollision: function(playerObj, platform) {
+        if(platform.index > 1 && platform.index < 8 ){
+            if (playerObj.body.blocked.down) {
+                Jetman.Player.resetCombo();
+                Jetman.Player.startAnglingUpright();
+            }   
+        }else{
+            Jetman.Platforms.onDeathLayerCollision(playerObj,platform )
+        }
 
-        if (playerObj.body.blocked.down) {
-            Jetman.Player.resetCombo();
-            Jetman.Player.startAnglingUpright();
-        }   
-        
+        // if(platform.index === 8 ||
+        //    platform.index === 9 || 
+        //    platform.index === 14){
 
+        // }
+        // console.log(playerObj, platform);
     },
 
     onDeathLayerCollision: function(playerObj, deathTile){
       //  debugger;
+
         switch (deathTile.index) {
             case Jetman.Platforms.TileIndexes.LAVA:
                 Jetman.Player.death();
@@ -56,22 +65,30 @@ Jetman.Platforms = {
         this.addTilesetImages(game);
         this.createLayers(game);
 
-       this.boundries.enableBody = true;
-        this.death.enableBody = true;
+       // this.boundries.enableBody = true;
+       //  this.death.enableBody = true;
 
         this.platforms.resizeWorld();
-        this.setTileCollisions();
+        this.setTileCollisions(game);
         //for preformance?
         game.camera.roundPx = false;
         
     },
 
-    createLayers: function(){
-         //this.bg =  this.map.createLayer('bg'); 
-        this.platforms = this.map.createLayer('platforms');  
-       this.boundries = this.map.createLayer('invisible');   
-       this.boundries.visible = false;
-       this.death = this.map.createLayer('death');
+    createLayers: function(game){
+
+        //this.bg =  this.map.createLayer('bg'); 
+        this.platforms = this.map.createLayer('everything' );  
+        // this.death = this.map.createLayer('everything');
+        //  this.boundries = this.map.createLayer('everything'); 
+       // this. new Tilemap
+
+      // this.boundries = this.map.createLayer('invisible'); 
+       
+     // // // this.boundries.visible = false;
+
+     //    this.death = this.map.createLayer('everything');
+
 
     
       
@@ -79,17 +96,35 @@ Jetman.Platforms = {
 
     addTilesetImages: function(){
      //   this.map.addTilesetImage( 'bg','bg');
-        this.map.addTilesetImage('deathTiles', 'deathTiles');
-        this.map.addTilesetImage('invisible', 'invisible');
-        this.map.addTilesetImage( 'platform_rock','rockPlatforms');
+        this.map.addTilesetImage('platform_caves_all','caveTiles')
+        // this.map.addTilesetImage('deathTiles', 'deathTiles');
+        // this.map.addTilesetImage('invisible', 'invisible');
+        // this.map.addTilesetImage( 'platform_rock','rockPlatforms');
          ;
     },
 
-    setTileCollisions: function(){
-        this.map.setCollisionBetween(12, 18, true, this.platforms);
-       this.map.setCollision(11, true, this.boundries);
+    setTileCollisions: function(game){
 
-       this.map.setCollision([2,5,10], true, this.death);  
+        // function onBoundryCollision(obj,tile){
+        //     if(obj.constructor.name === "Walker"){
+        //          obj.reverseDirections();
+        //     }
+        //    // debugger;
+        // }
+
+        // function onDeathCollision(obj, tile){
+        //     obj.death();
+        // }
+
+        //his.grouptest = game.add.group();
+
+       //this.map.setTileIndexCallback(1, onBoundryCollision, this);
+       // this.map.setTileIndexCallback([8,9,14], onDeathCollision, this);
+
+        this.map.setCollisionBetween(1, 7, true, this.platforms);
+      // this.map.setCollision(1, true, this.boundries);
+
+        this.map.setCollision([8,9,14], true, this.platforms);  
     },
 
     initBackground: function(game){

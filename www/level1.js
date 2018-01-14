@@ -5,7 +5,7 @@ Jetman.Level1.prototype = {
       Jetman.Platforms.initTileMap(this.game);
      Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
-      Jetman.Player.fuel = 200;
+      Jetman.Player.fuel = 200000;
       Jetman.Walker.init(Jetman.Platforms.map,this.game);
 
       Jetman.Jumper.init(Jetman.Platforms.map,this.game);
