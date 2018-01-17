@@ -3,15 +3,19 @@ Jetman.Level1.prototype = {
 	  create :function() {  
       this.game.time.advancedTiming = true;
       Jetman.Platforms.initTileMap(this.game);
-     Jetman.Particles.initParticles(this.game);
+      Jetman.Particles.initParticles(this.game);
       Jetman.Player.initPlayer(this.game);
-      Jetman.Player.fuel = 200;
-      Jetman.Walker.init(Jetman.Platforms.map,this.game);
+      Jetman.Player.fuel = 0;
 
-      Jetman.Jumper.init(Jetman.Platforms.map,this.game);
-      //TODO: new object for map 
-      Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
-     // Jetman.Fuel.init(Jetman.Platforms.map,this.game);    
+
+      //Jetman.Walker.init(Jetman.Platforms.map,this.game);
+       Jetman.PoolSpawner.createObjects(this.game);
+      Jetman.PoolSpawner.initSpawnPoints(Jetman.Platforms.map);
+
+     //  Jetman.Jumper.init(Jetman.Platforms.map,this.game);
+      // //TODO: new object for map 
+    //  Jetman.SpikeEnemies.init(Jetman.Platforms.map,this.game);
+  
       Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
 
       Jetman.Platforms.initBackground(this.game);
@@ -22,6 +26,7 @@ Jetman.Level1.prototype = {
 
     update: function() {
 
+       Jetman.PoolSpawner.checkSpawn(this.game);
 
       //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 
@@ -37,7 +42,7 @@ Jetman.Level1.prototype = {
        this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
        this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
-    //  this.game.debug.body(Jetman.JumpPad.group.children[5]);
+     // this.game.debug.body(Jetman.JumpPad.group.children[5]);
 
 
 

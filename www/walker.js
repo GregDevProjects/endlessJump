@@ -1,16 +1,37 @@
 Jetman.Walker = {
-
+    
     init: function(map, game) {
-        for (var i = 0; i < map.objects.walker.length; i++) {
+        this.timerCheck = 30;
+        this.WALKERS_TO_RENDER = 5;
+        this.group = game.add.group();
+        this.spawnPoints = [];
+        this.walkerArr = [];
+        // for (var i = 0; i < map.objects.walker.length; i++) {
 
-            new Walker(
-                game,
-                map.objects.walker[i].x,
-                map.objects.walker[i].y
-            );
-        }
+        //     this.spawnPoints.push(
+        //         {  
+        //             x:  map.objects.walker[i].x,
+        //             y: map.objects.walker[i].y,
+        //             spawned: false
+        //         }
+        //     );
+        // }
+
+
+        //create walkers to move around 
+        // for (var i = 0; i <  this.WALKERS_TO_RENDER; i++) {
+
+        //     this.group.add(new Walker(
+        //         game
+        //     ));
+        // }
+
+        // game.add.existing( this.walkerArr[0]);
+        // this.walkerArr[0].body = null;
+         //this.walkerArr[0].revive();
 
     }
+
 
 }
 
@@ -22,8 +43,7 @@ Walker = function(game, x, y) {
     this.walkerMoveSpeed = 50;
     this.button = this.addChild(game.make.sprite(0, -10, 'button'));
     game.physics.enable(this.button, Phaser.Physics.ARCADE);
-    this.button.body.moves = false
-
+    this.button.body.moves = false;
 
     this.move = function() {
         if (this.body.blocked.right || this.body.blocked.left) {
@@ -35,6 +55,7 @@ Walker = function(game, x, y) {
     this.onPlayerWalkerCollision = function(player, walker) {
         Jetman.Player.death();
     }
+
 
     this.onPlayerButtonCollision = function(button, player) {
 
@@ -50,6 +71,7 @@ Walker = function(game, x, y) {
     }
 
     game.add.existing(this);
+    this.kill();
 }
 
 
@@ -57,6 +79,7 @@ Walker.prototype = Object.create(Phaser.Sprite.prototype);
 Walker.prototype.constructor = Walker;
 
 Walker.prototype.update = function() {
+   
     this.game.physics.arcade.collide(this, Jetman.Platforms.platforms);
     this.game.physics.arcade.collide(this, Jetman.Platforms.boundries);
     this.game.physics.arcade.collide(this, Jetman.Player.sprite, this.onPlayerWalkerCollision);

@@ -5,16 +5,17 @@ Jetman.SpikeEnemyTypes = {
 };
 
 Jetman.SpikeEnemies = {
-
+    
     init: function(map, game) {
+        this.enemyArr=[];
 
             for (var i = 0; i < map.objects.spikeEnemy.length; i++) {
-                new SpikedEnemy(
+                this.enemyArr.push(new SpikedEnemy(
                     this.nameToEnum(map.objects.spikeEnemy[i].name),
                     game,
                     map.objects.spikeEnemy[i].x,
                     map.objects.spikeEnemy[i].y
-                )
+                ));
 
 
             }
@@ -43,19 +44,24 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
     this.spikeEnemyType = spikeEnemyType;
     game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
     this.moveSpeed = 100;
-
+    this.body.immovable = true;
 
     this.move = function() {
 
-        if (this.body.blocked.right || this.body.blocked.left) {
-            this.moveSpeed = -this.moveSpeed;
-        }
+
 
         switch (this.spikeEnemyType) {
             case Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT:
+                if (this.body.blocked.right || this.body.blocked.left) {
+                    this.moveSpeed = -this.moveSpeed;
+                }
                 this.body.velocity.x = this.moveSpeed;
+
                 return;
             case Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT:
+                if (this.body.blocked.right || this.body.blocked.left) {
+                    this.moveSpeed = -this.moveSpeed;
+                }
                 this.body.velocity.x = -this.moveSpeed;
                 return;
             case Jetman.SpikeEnemyTypes.FOLLOW:
@@ -113,6 +119,7 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
         Jetman.Player.applySuddenVelocity(0, -300);
         button.parent.kill();
         button.kill();
+      
     }
 
     this.onPlayerSpikeEnemyOverlap = function(player,spikeEnemy){
@@ -123,6 +130,7 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
 
 
     game.add.existing(this);
+    this.kill();
 }
 
 
