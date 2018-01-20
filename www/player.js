@@ -26,6 +26,7 @@ Jetman.Player = {
 
     death: function(){
         Jetman.Text.displayDeathText(this.game);
+        Jetman.ExplosionEffect.play(this.sprite);
         this.game.camera.target = null;
         this.game.camera.flash(0xff0000, 500);
         this.sprite.kill();

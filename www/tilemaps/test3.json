@@ -365,6 +365,17 @@
                  "width":14.6666666666667,
                  "x":294.666666666667,
                  "y":457.333333333333
+                }, 
+                {
+                 "height":24,
+                 "id":256,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":28,
+                 "x":32,
+                 "y":3691
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -427,8 +438,8 @@
                  "type":"",
                  "visible":true,
                  "width":18,
-                 "x":239,
-                 "y":5103.5454545455
+                 "x":42.3333333333333,
+                 "y":10878.2121212122
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -441,26 +452,26 @@
          "name":"jumpPad",
          "objects":[
                 {
-                 "height":30,
+                 "height":60,
                  "id":177,
                  "name":"up",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":30,
-                 "x":281,
-                 "y":10974
+                 "x":283,
+                 "y":10932
                 }, 
                 {
-                 "height":27.3333333333335,
+                 "height":60,
                  "id":185,
                  "name":"up",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":19.3333333333333,
-                 "x":35.3333333333333,
-                 "y":3686.66666666667
+                 "width":30,
+                 "x":31.3333333333333,
+                 "y":3523
                 }, 
                 {
                  "height":23,
@@ -520,7 +531,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":256,
+ "nextobjectid":257,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

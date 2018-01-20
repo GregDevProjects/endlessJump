@@ -37,7 +37,7 @@ Jetman.PoolSpawner = {
 	},
 
 	createObjects: function(game){
-
+        this.game = game;
 
         //too much repetition here, I'll go crazy if I have to do this for every obj 
 
@@ -62,48 +62,45 @@ Jetman.PoolSpawner = {
 		this.SPIKED_TO_RENDER = 5;
 		this.spawnPoints = [];
 
-
+        var indexCounter = 0;
         for (var i = 0; i < map.objects.spikeEnemy.length; i++) {
 
-            this.spawnPoints.push(
+            this.spawnPoints[indexCounter] = 
                 {  
                     x:  map.objects.spikeEnemy[i].x,
                     y: map.objects.spikeEnemy[i].y,
                     type: Jetman.SpikeEnemies.nameToEnum(map.objects.spikeEnemy[i].name), 
-                    spawned: false
-                }
-            );
+                    spawned: false,
+                    arrayIndex: indexCounter
+                };
+            indexCounter++;
+            
         }
 
           for (var i = 0; i < map.objects.walker.length; i++) {
 
-            this.spawnPoints.push(
+            this.spawnPoints[indexCounter] = 
                 {  
                     x:  map.objects.walker[i].x,
                     y: map.objects.walker[i].y,
                     type: Jetman.EnemyTypes.WALKER,
-                    spawned: false
-                }
-            );
+                    spawned: false,
+                    arrayIndex: indexCounter
+                };
+        
+            indexCounter++;
         }
-
-      //  debugger;
 
 	},
 
     checkSpawn: function(game){
-       // console.log(Jetman.Player.sprite.y - this.walkerGroup.children[0].y);
          this.timerCheck--;
          if(this.timerCheck >=0){
             return;
          } else {
-            this.timerCheck = 45;
+            this.timerCheck = 30;
          }
-         //console.log('spawnin');
 
-
-        //POPULATE FIRST 5 AT START RATHER THAN MOVIN 1 ATA TIME 
-        //SET SPAWNED TO FALSE AFTER A DELAY AFTER SPRITE IS KILLED 
         
         for(var i =0; i< this.spawnPoints.length;i++){ 
             var distance = Jetman.Player.sprite.y - this.spawnPoints[i].y;
@@ -136,26 +133,45 @@ Jetman.PoolSpawner = {
     	}
 
     },
-    //need a way to tell what spawn point the enemy started at 
-    //that way we can set spawned to false after a set time to enable respawning 
-    spawnObject: function(group, spawnPoint){
-                //revive walker from pool
-                var newWAlker = group.getFirstDead(
-                    false,
-                    spawnPoint.x,
-                    spawnPoint.y
-                );
 
-                if(newWAlker){
-                    //spawn at point
-                   newWAlker.revive(); 
-                   newWAlker.button.revive();
-                   spawnPoint.spawned = true;
-                } else {
-                    var walkerToKill = group.getFurthestFrom(Jetman.Player.sprite);
-                    walkerToKill.kill();
-                }
+    spawnObject: function(group, spawnPoint){
+        //check if any enemy is alive
+        var newWAlker = group.getFirstDead(
+            false,
+            spawnPoint.x,
+            spawnPoint.y                    
+        );
+
+        if(newWAlker){
+            this.reviveDeadAndMoveToSpawnPoint(spawnPoint, newWAlker);
+        } else {
+            this.moveFurthestEnemyToSpawnPoint(group, spawnPoint);
+        }
                  
+    },
+
+    reviveDeadAndMoveToSpawnPoint: function(spawnPoint, objToRevive){
+        objToRevive.arrayIndex = spawnPoint.arrayIndex;
+        objToRevive.revive(); 
+        objToRevive.button.revive();
+        this.spawnPoints[spawnPoint.arrayIndex].spawned = true;       
+    },
+
+    moveFurthestEnemyToSpawnPoint: function(group, spawnPoint){
+        var objToMove = group.getFurthestFrom(Jetman.Player.sprite);
+        this.spawnPoints[spawnPoint.arrayIndex].spawned = true;
+        objToMove.x = spawnPoint.x;
+        objToMove.y = spawnPoint.y;
+        objToMove.arrayIndex = spawnPoint.arrayIndex;        
+    },
+
+    respawn: function(spawnPointIndex){
+         this.game.time.events.add(Phaser.Timer.SECOND * 10, resetIndex, this);
+
+         function resetIndex(){
+            this.spawnPoints[spawnPointIndex].spawned = false;
+            
+         }
     }
 
 }

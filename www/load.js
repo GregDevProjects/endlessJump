@@ -19,12 +19,14 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('jumper', 'img/jumper.png');
                 this.game.load.image('rockPlatforms', 'img/platform_rock.png');
 
-                this.game.load.spritesheet('jumpPadUp', 'img/jumpPadUp.png',30, 30, 17); 
+                this.game.load.spritesheet('jumpPadUp', 'img/jumpPadUp.png',30, 60, 3); 
 
                 this.game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
                 this.game.load.spritesheet('fireball','img/fireBall.png',116.333,168,7);
                 
                 this.game.load.tilemap('mapName', 'tilemaps/test3.json', null, Phaser.Tilemap.TILED_JSON);
+
+                this.game.load.spritesheet('kaboom', 'img/explosion.png', 96, 96);
         },
 
         create: function() {

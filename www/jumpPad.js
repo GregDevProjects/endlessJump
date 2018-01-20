@@ -29,7 +29,7 @@ JumpPad = function(name, game, x, y) {
       this.anchor = {x:0.5, y:0.5};
     }
 
-    this.animations.add('motion', null, 60, true);
+    this.animations.add('motion', null, 2, true);
     this.animations.play('motion');
 
     this.onPlayerOverlap = function(player, jumpPad){

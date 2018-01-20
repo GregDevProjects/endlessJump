@@ -48,35 +48,37 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
 
     this.move = function() {
 
-
-
         switch (this.spikeEnemyType) {
             case Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT:
-                if (this.body.blocked.right || this.body.blocked.left) {
-                    this.moveSpeed = -this.moveSpeed;
-                }
-                this.body.velocity.x = this.moveSpeed;
-
+                this.moveBackAndForthBetweenBoundries();
                 return;
             case Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT:
-                if (this.body.blocked.right || this.body.blocked.left) {
-                    this.moveSpeed = -this.moveSpeed;
-                }
-                this.body.velocity.x = -this.moveSpeed;
+                this.moveBackAndForthBetweenBoundries();
                 return;
             case Jetman.SpikeEnemyTypes.FOLLOW:
-                this.rotateEye(game);
-                if (this.centerX - 5 <= Jetman.Player.sprite.centerX && this.centerX + 5 >= Jetman.Player.sprite.centerX) {
-                    this.body.velocity.x = 0;
-                    return;
-                }
-                if (this.centerX > Jetman.Player.sprite.centerX) {
-                    this.body.velocity.x = -this.moveSpeed;
-                } else {
-                    this.body.velocity.x = this.moveSpeed;
-                }
+                this.followPlayerAndRotateEye();
         }
 
+    }
+
+    this.moveBackAndForthBetweenBoundries = function(){
+        if (this.body.blocked.right || this.body.blocked.left) {
+            this.moveSpeed = -this.moveSpeed;
+        }
+        this.body.velocity.x = -this.moveSpeed;        
+    }
+
+    this.followPlayerAndRotateEye = function(){
+        this.rotateEye(game);
+        if (this.centerX - 5 <= Jetman.Player.sprite.centerX && this.centerX + 5 >= Jetman.Player.sprite.centerX) {
+            this.body.velocity.x = 0;
+            return;
+        }
+        if (this.centerX > Jetman.Player.sprite.centerX) {
+            this.body.velocity.x = -this.moveSpeed;
+        } else {
+            this.body.velocity.x = this.moveSpeed;
+        }
     }
 
     this.attachEye = function(game) {
@@ -113,9 +115,10 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
         if (!button.body.touching.up) {
             return;
         }
-        Jetman.Player.fuel += 200;
+        Jetman.ExplosionEffect.play(button.parent);
+        Jetman.Player.fuel += 150;
         Jetman.Player.incrementCombo();
-        //Jetman.Player.fuel =200;
+        Jetman.PoolSpawner.respawn(button.parent.arrayIndex);
         Jetman.Player.applySuddenVelocity(0, -300);
         button.parent.kill();
         button.kill();

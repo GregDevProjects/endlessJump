@@ -1,36 +1,5 @@
 Jetman.Walker = {
     
-    init: function(map, game) {
-        this.timerCheck = 30;
-        this.WALKERS_TO_RENDER = 5;
-        this.group = game.add.group();
-        this.spawnPoints = [];
-        this.walkerArr = [];
-        // for (var i = 0; i < map.objects.walker.length; i++) {
-
-        //     this.spawnPoints.push(
-        //         {  
-        //             x:  map.objects.walker[i].x,
-        //             y: map.objects.walker[i].y,
-        //             spawned: false
-        //         }
-        //     );
-        // }
-
-
-        //create walkers to move around 
-        // for (var i = 0; i <  this.WALKERS_TO_RENDER; i++) {
-
-        //     this.group.add(new Walker(
-        //         game
-        //     ));
-        // }
-
-        // game.add.existing( this.walkerArr[0]);
-        // this.walkerArr[0].body = null;
-         //this.walkerArr[0].revive();
-
-    }
 
 
 }
@@ -44,6 +13,8 @@ Walker = function(game, x, y) {
     this.button = this.addChild(game.make.sprite(0, -10, 'button'));
     game.physics.enable(this.button, Phaser.Physics.ARCADE);
     this.button.body.moves = false;
+    //value will be givin by poolspawner
+    this.arrayIndex;
 
     this.move = function() {
         if (this.body.blocked.right || this.body.blocked.left) {
@@ -63,11 +34,13 @@ Walker = function(game, x, y) {
             return;
         }
 
+        Jetman.ExplosionEffect.play(button.parent);
         Jetman.Player.incrementCombo();
-        Jetman.Player.fuel += 150;
+        Jetman.Player.fuel += 100;
         Jetman.Player.applySuddenVelocity(0, -300);
         button.parent.kill();
         button.kill();
+        Jetman.PoolSpawner.respawn(button.parent.arrayIndex);
     }
 
     game.add.existing(this);
