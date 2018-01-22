@@ -64,7 +64,7 @@ Walker.prototype.constructor = Walker;
 Walker.prototype.update = function() {
    
     this.game.physics.arcade.collide(this, Jetman.Platforms.platforms);
-    this.game.physics.arcade.collide(this, Jetman.Platforms.boundries);
+    this.game.physics.arcade.collide(this, Jetman.Boundry.group);
     this.game.physics.arcade.collide(this, Jetman.Player.sprite, this.onPlayerWalkerCollision);
     this.game.physics.arcade.collide(this.button, Jetman.Player.sprite, this.onPlayerButtonCollision);
     
