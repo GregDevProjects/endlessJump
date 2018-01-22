@@ -9,7 +9,7 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('fuelHigh', 'img/high.png');
 
                 this.game.load.image('jetParticle', 'img/jetParticle.png')
-                this.game.load.image('deathTiles', 'img/deathTiles_m.png');
+
                 this.game.load.image('spikeEnemy', 'img/spikeEnemy.png');
                 this.game.load.image('spikeEnemyEye', 'img/spikeEnemyEye.png');
                 this.game.load.image('button', 'img/button.png');
@@ -17,7 +17,9 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('walker', 'img/walker.png');
 
                 this.game.load.image('jumper', 'img/jumper.png');
-                this.game.load.image('rockPlatforms', 'img/platform_rock.png');
+
+      
+                this.game.load.image('caveTiles', 'img/platform_caves_all.png');
 
                 this.game.load.spritesheet('jumpPadUp', 'img/jumpPadUp.png',30, 60, 3); 
 

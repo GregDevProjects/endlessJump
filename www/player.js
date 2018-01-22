@@ -25,6 +25,7 @@ Jetman.Player = {
     },
 
     death: function(){
+      //  return;
         Jetman.Text.displayDeathText(this.game);
         Jetman.ExplosionEffect.play(this.sprite);
         this.game.camera.target = null;

@@ -17,10 +17,20 @@ Walker = function(game, x, y) {
     this.arrayIndex;
 
     this.move = function() {
-        if (this.body.blocked.right || this.body.blocked.left) {
-            this.walkerMoveSpeed = -this.walkerMoveSpeed;
+        if (this.body.blocked.right || this.body.touching.right || this.body.blocked.left ||this.body.touching.left) {
+            this.reverseDirections();
         }
         this.body.velocity.x = this.walkerMoveSpeed;
+    }
+
+    this.reverseDirections = function(thisWalker){
+        this.walkerMoveSpeed = -this.walkerMoveSpeed;
+    }
+
+    this.test = function(walker,yo){
+      //  debugger;
+      walker.x+=20;
+      walker.walkerMoveSpeed = -walker.walkerMoveSpeed;
     }
 
     this.onPlayerWalkerCollision = function(player, walker) {
@@ -57,6 +67,7 @@ Walker.prototype.update = function() {
     this.game.physics.arcade.collide(this, Jetman.Platforms.boundries);
     this.game.physics.arcade.collide(this, Jetman.Player.sprite, this.onPlayerWalkerCollision);
     this.game.physics.arcade.collide(this.button, Jetman.Player.sprite, this.onPlayerButtonCollision);
+    
     this.move();
 
 }

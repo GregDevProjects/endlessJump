@@ -94,3 +94,4 @@ Jumper.prototype.update = function() {
     this.move();
 
 }
+
