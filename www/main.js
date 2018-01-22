@@ -11,15 +11,15 @@ function onDeviceReady(){
 }
 
 //for web 
-window.onload = function() {
-  onDeviceReady();
-}
+// window.onload = function() {
+//   onDeviceReady();
+// }
 
 
 // for mobile
-//document.addEventListener("deviceready", onDeviceReady, false);
-
-//for mobile
 document.addEventListener("deviceready", onDeviceReady, false);
+
+//for web
+// document.addEventListener("deviceready", onDeviceReady, false);
 
 
