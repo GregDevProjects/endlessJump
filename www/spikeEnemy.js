@@ -5,16 +5,17 @@ Jetman.SpikeEnemyTypes = {
 };
 
 Jetman.SpikeEnemies = {
-
+    
     init: function(map, game) {
+        this.enemyArr=[];
 
             for (var i = 0; i < map.objects.spikeEnemy.length; i++) {
-                new SpikedEnemy(
+                this.enemyArr.push(new SpikedEnemy(
                     this.nameToEnum(map.objects.spikeEnemy[i].name),
                     game,
                     map.objects.spikeEnemy[i].x,
                     map.objects.spikeEnemy[i].y
-                )
+                ));
 
 
             }
@@ -43,34 +44,41 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
     this.spikeEnemyType = spikeEnemyType;
     game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
     this.moveSpeed = 100;
-
+    this.body.immovable = true;
 
     this.move = function() {
 
+        switch (this.spikeEnemyType) {
+            case Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT:
+                this.moveBackAndForthBetweenBoundries();
+                return;
+            case Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT:
+                this.moveBackAndForthBetweenBoundries();
+                return;
+            case Jetman.SpikeEnemyTypes.FOLLOW:
+                this.followPlayerAndRotateEye();
+        }
+
+    }
+
+    this.moveBackAndForthBetweenBoundries = function(){
         if (this.body.blocked.right || this.body.blocked.left) {
             this.moveSpeed = -this.moveSpeed;
         }
+        this.body.velocity.x = -this.moveSpeed;        
+    }
 
-        switch (this.spikeEnemyType) {
-            case Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT:
-                this.body.velocity.x = this.moveSpeed;
-                return;
-            case Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT:
-                this.body.velocity.x = -this.moveSpeed;
-                return;
-            case Jetman.SpikeEnemyTypes.FOLLOW:
-                this.rotateEye(game);
-                if (this.centerX - 5 <= Jetman.Player.sprite.centerX && this.centerX + 5 >= Jetman.Player.sprite.centerX) {
-                    this.body.velocity.x = 0;
-                    return;
-                }
-                if (this.centerX > Jetman.Player.sprite.centerX) {
-                    this.body.velocity.x = -this.moveSpeed;
-                } else {
-                    this.body.velocity.x = this.moveSpeed;
-                }
+    this.followPlayerAndRotateEye = function(){
+        this.rotateEye(game);
+        if (this.centerX - 5 <= Jetman.Player.sprite.centerX && this.centerX + 5 >= Jetman.Player.sprite.centerX) {
+            this.body.velocity.x = 0;
+            return;
         }
-
+        if (this.centerX > Jetman.Player.sprite.centerX) {
+            this.body.velocity.x = -this.moveSpeed;
+        } else {
+            this.body.velocity.x = this.moveSpeed;
+        }
     }
 
     this.attachEye = function(game) {
@@ -107,12 +115,14 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
         if (!button.body.touching.up) {
             return;
         }
-        Jetman.Player.fuel += 200;
+        Jetman.ExplosionEffect.play(button.parent);
+        Jetman.Player.fuel += 150;
         Jetman.Player.incrementCombo();
-        //Jetman.Player.fuel =200;
+        Jetman.PoolSpawner.respawn(button.parent.arrayIndex);
         Jetman.Player.applySuddenVelocity(0, -300);
         button.parent.kill();
         button.kill();
+      
     }
 
     this.onPlayerSpikeEnemyOverlap = function(player,spikeEnemy){
@@ -123,6 +133,7 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
 
 
     game.add.existing(this);
+    this.kill();
 }
 
 

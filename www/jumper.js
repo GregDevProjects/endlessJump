@@ -81,6 +81,7 @@ Jumper = function(game, x, y) {
     }
 
     game.add.existing(this);
+    this.kill();
 }
 
 Jumper.prototype = Object.create(Phaser.Sprite.prototype);
