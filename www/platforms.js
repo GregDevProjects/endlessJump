@@ -21,8 +21,6 @@ Jetman.Platforms = {
     },
 
     onDeathLayerCollision: function(playerObj, deathTile){
-      //  debugger;
-
         switch (deathTile.index) {
             case Jetman.Platforms.TileIndexes.LAVA:
                 Jetman.Player.death();
@@ -58,10 +56,6 @@ Jetman.Platforms = {
 
         this.addTilesetImages(game);
         this.createLayers(game);
-
-       // this.boundries.enableBody = true;
-       //  this.death.enableBody = true;
-
         this.platforms.resizeWorld();
         this.setTileCollisions(game);
         //for preformance?
@@ -78,7 +72,17 @@ Jetman.Platforms = {
         this.map.addTilesetImage('platform_caves_all','caveTiles');
     },
 
+    invisibleBoundryCollision: function(obj,platform){
+        if(obj.constructor.name === "Walker"){
+            obj.reverseDirections();
+        }
+        
+    },
+
     setTileCollisions: function(game){
+        //invisible boundry for walkers 
+        //a little hackey but easy on preformance 
+        this.map.setTileIndexCallback(1, this.invisibleBoundryCollision, this);
         //platform tiles  
         this.map.setCollisionBetween(2, 7, true, this.platforms);
         //death tiles 
