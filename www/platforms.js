@@ -7,6 +7,8 @@ Jetman.Platforms = {
         SPIKES_DOWN: 8
     },
 
+    lastCameraPosition: false,
+
 
     onPlatformLayerCollision: function(playerObj, platform) {
         if(platform.index > 2 && platform.index < 8 ){
@@ -90,11 +92,47 @@ Jetman.Platforms = {
     },
 
     initBackground: function(game){
-        Jetman.Platforms.bg_bg = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_bg');
-        Jetman.Platforms.bg_fg = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_fg');
-        Jetman.Platforms.bg_bg.fixedToCamera = true;
-        game.world.sendToBack(Jetman.Platforms.bg_fg);
-        game.world.sendToBack(Jetman.Platforms.bg_bg);
+
+        Jetman.Platforms.bg_1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_1');
+        Jetman.Platforms.bg_2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_2');
+        Jetman.Platforms.bg_3 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_3');
+        Jetman.Platforms.bg_4 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_4');
+
+         game.world.sendToBack(Jetman.Platforms.bg_1);
+         game.world.sendToBack(Jetman.Platforms.bg_2);
+         game.world.sendToBack(Jetman.Platforms.bg_3);
+         game.world.sendToBack(Jetman.Platforms.bg_4);
+
+    },
+    //TODO: MERGE LAYER 3+4 
+    // ONLY SCROLL LAYER 1+2
+    // POST FINDINGS
+    scrollBackground: function(camera){
+        var layer1ScrollSpeed = 0.4;
+        var layer2ScrollSpeed = 0.1;
+        var layer3ScrollSpeed = 0.0;
+
+        if(this.lastCameraPosition === false){
+            this.lastCameraPosition = camera.y;
+        }
+        
+
+        if(this.lastCameraPosition > camera.y){
+            this.bg_1.tilePosition.y += layer1ScrollSpeed;
+            this.bg_2.tilePosition.y += layer2ScrollSpeed;
+            this.bg_3.tilePosition.y += layer3ScrollSpeed;
+        } else if (this.lastCameraPosition < camera.y) {
+            this.bg_1.tilePosition.y -= layer1ScrollSpeed;
+            this.bg_2.tilePosition.y -= layer2ScrollSpeed;
+            this.bg_3.tilePosition.y -= layer3ScrollSpeed;           
+        }
+
+
+
+        this.lastCameraPosition = camera.y;
     }
+
+    
+
 
 }

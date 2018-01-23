@@ -2,8 +2,15 @@ Jetman.PreLoad = function(game) {};
 Jetman.PreLoad.prototype = { 
         preload: function() {
                 this.game.load.image('player', 'img/playerProto_m.png');
+
                 this.game.load.image('bg_fg', 'img/cave_512_fg.png');
-                 this.game.load.image('bg_bg', 'img/cave_512_bg.png');
+                this.game.load.image('bg_bg', 'img/cave_512_bg.png');
+
+                this.game.load.image('bg_1', 'img/bg/cave_1.png');
+                this.game.load.image('bg_2', 'img/bg/cave_2.png');
+                this.game.load.image('bg_3', 'img/bg/cave_3.png');
+                this.game.load.image('bg_4', 'img/bg/cave_4.png');
+
                 this.game.load.image('fuelLow', 'img/low_m.png');
                 this.game.load.image('fuelMed', 'img/med.png'); 
                 this.game.load.image('fuelHigh', 'img/high.png');
