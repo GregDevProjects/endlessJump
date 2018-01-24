@@ -15,13 +15,16 @@ Jetman.Level1.prototype = {
       Jetman.Player.initPlayer(this.game);
 
       Jetman.Player.fuel = 0;
+       
       Jetman.ExplosionEffect.init(this.game);
+      Jetman.FuelGauge.init(this.game);
+      
 
 
     },
 
     update: function() {
-
+      Jetman.Platforms.scrollBackground(this.game.camera);
        Jetman.PoolSpawner.checkSpawn(this.game);
 
       //tile collisions 
@@ -36,11 +39,8 @@ Jetman.Level1.prototype = {
     render: function() {
      // this.game.debug.pointer(this.game.input.activePointer);
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
-      this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
-      this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
-
-
-
+      // this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
+     // this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
 
     }
 

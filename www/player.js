@@ -1,4 +1,7 @@
 Jetman.Player = {
+
+    MAX_FUEL: 400,
+
     initPlayer: function(game){
         // firstrun = true;
         this.game = game;
@@ -62,6 +65,7 @@ Jetman.Player = {
             Jetman.Particles.stopJetpackParticleFlare();
             return false;
         }
+        Jetman.FuelGauge.sprite.setPointerPosition(false);
         this.enableAngleCorrection = false;
         Jetman.Player.sprite.body.allowGravity = false; 
         this.game.physics.arcade.moveToPointer(Jetman.Player.sprite, this.flySpeed, this.game.input.activePointer, 0);
@@ -146,6 +150,16 @@ Jetman.Player = {
 
     resetCombo: function(){
          this.currentComboCounter = 0;
+    },
+
+    increaseFuel: function(amount){
+        if(amount + this.fuel  > this.MAX_FUEL){
+            this.fuel = this.MAX_FUEL;
+            Jetman.FuelGauge.sprite.setPointerPosition(true);
+            return;
+        }
+        this.fuel += amount;
+        Jetman.FuelGauge.sprite.setPointerPosition(true);
     }    
 
 }

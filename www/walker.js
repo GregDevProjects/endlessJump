@@ -41,7 +41,8 @@ Walker = function(game, x, y) {
 
         Jetman.ExplosionEffect.play(button.parent);
         Jetman.Player.incrementCombo();
-        Jetman.Player.fuel += 100;
+        
+        Jetman.Player.increaseFuel(100);
         Jetman.Player.applySuddenVelocity(0, -300);
         button.parent.kill();
         button.kill();

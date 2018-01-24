@@ -116,7 +116,8 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
             return;
         }
         Jetman.ExplosionEffect.play(button.parent);
-        Jetman.Player.fuel += 150;
+       
+        Jetman.Player.increaseFuel(150);
         Jetman.Player.incrementCombo();
         Jetman.PoolSpawner.respawn(button.parent.arrayIndex);
         Jetman.Player.applySuddenVelocity(0, -300);
