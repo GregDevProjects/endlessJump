@@ -93,6 +93,8 @@ Jetman.Platforms = {
 
     initBackground: function(game){
 
+        // game.stage.backgroundColor = 0xe3dcd6; //#fcf9f9
+
         Jetman.Platforms.bg_1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_1');
         Jetman.Platforms.bg_2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_2');
         Jetman.Platforms.bg_3 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_3');
@@ -104,13 +106,11 @@ Jetman.Platforms = {
          game.world.sendToBack(Jetman.Platforms.bg_4);
 
     },
-    //TODO: MERGE LAYER 3+4 
-    // ONLY SCROLL LAYER 1+2
     // POST FINDINGS
     scrollBackground: function(camera){
-        var layer1ScrollSpeed = 0.4;
+        var layer1ScrollSpeed = 0.2;
         var layer2ScrollSpeed = 0.1;
-        var layer3ScrollSpeed = 0.0;
+        var layer3ScrollSpeed = 0.01;
 
         if(this.lastCameraPosition === false){
             this.lastCameraPosition = camera.y;
@@ -127,12 +127,8 @@ Jetman.Platforms = {
             this.bg_3.tilePosition.y -= layer3ScrollSpeed;           
         }
 
-
-
         this.lastCameraPosition = camera.y;
     }
-
-    
 
 
 }

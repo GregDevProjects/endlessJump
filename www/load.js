@@ -11,9 +11,8 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('bg_3', 'img/bg/cave_3.png');
                 this.game.load.image('bg_4', 'img/bg/cave_4.png');
 
-                this.game.load.image('fuelLow', 'img/low_m.png');
-                this.game.load.image('fuelMed', 'img/med.png'); 
-                this.game.load.image('fuelHigh', 'img/high.png');
+                this.game.load.image('guage', 'img/guage.png');
+                this.game.load.image('guagePointer', 'img/guage_pointer.png');
 
                 this.game.load.image('jetParticle', 'img/jetParticle.png')
 
