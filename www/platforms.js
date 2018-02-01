@@ -11,12 +11,14 @@ Jetman.Platforms = {
 
 
     onPlatformLayerCollision: function(playerObj, platform) {
-        if(platform.index > 2 && platform.index < 8 ){
+        //for safe platforms 
+        if(platform.index > 1 && platform.index < 8 ){
             if (playerObj.body.blocked.down) {
                 Jetman.Player.resetCombo();
                 Jetman.Player.startAnglingUpright();
             }   
         }else{
+        //for death platforms
             Jetman.Platforms.onDeathLayerCollision(playerObj,platform )
         }
 
@@ -93,8 +95,6 @@ Jetman.Platforms = {
 
     initBackground: function(game){
 
-        // game.stage.backgroundColor = 0xe3dcd6; //#fcf9f9
-
         Jetman.Platforms.bg_1 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_1');
         Jetman.Platforms.bg_2 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_2');
         Jetman.Platforms.bg_3 = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'bg_3');
@@ -116,7 +116,6 @@ Jetman.Platforms = {
             this.lastCameraPosition = camera.y;
         }
         
-
         if(this.lastCameraPosition > camera.y){
             this.bg_1.tilePosition.y += layer1ScrollSpeed;
             this.bg_2.tilePosition.y += layer2ScrollSpeed;

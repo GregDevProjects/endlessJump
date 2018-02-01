@@ -19,12 +19,16 @@ Jetman.Player = {
         this.sprite.anchor.setTo(0.5, 0.5);
         this.fuel = 0;
         this.enableAngleCorrection = false;
-        this.sprite.body.bounce.y = 1;
-        this.sprite.body.maxVelocity.y= this.flySpeed; 
-        this.sprite.body.drag.x = 100;
+        this.sprite.body.bounce.y = 0.5;
+        //this.sprite.body.maxVelocity.y= this.flySpeed; 
+        this.sprite.body.drag.x = 150;
+      //  this.sprite.body.drag.y = 50;
         this.isOnJumpPadMomentum = false;
         this.currentComboCounter = 0;
         this.maxCombo = 0;
+        this.isFlinging = false;
+       // this.isFlingingRight = false;
+        this.disableFling = false;
     },
 
     death: function(){
@@ -41,30 +45,36 @@ Jetman.Player = {
         
     },
 
-    moveRight: function(){
-      if(Jetman.Player.didCollideWithJumpadX){
-        if(Jetman.Player.sprite.body.velocity.x <= 0)
-        Jetman.Player.didCollideWithJumpadX= false;
-        return;
-      }
-        this.sprite.body.velocity.x = 70;
-    },
-
-    moveLeft: function(){
-      if(Jetman.Player.didCollideWithJumpadX){
-        if(Jetman.Player.sprite.body.velocity.x <= 0)
-        Jetman.Player.didCollideWithJumpadX= false;
-        return;
-      }
-        this.sprite.body.velocity.x = -70; 
+    fling: function(angle, force){
+        if(this.isFlinging || this.isOnJumpPadMomentum){// || this.disableFling){
+           return;
+        }
+        this.game.physics.arcade.velocityFromAngle(
+            angle,
+            force,
+            this.sprite.body.velocity
+        );
+        this.isFlinging = true;
+        this.isFlingingRight = this.sprite.body.velocity.x > 0 ? true : false;
     },
 
     flyToActivePointer: function(){
-        if(this.fuel <= 0 || this.isOnJumpPadMomentum){
+        if(this.fuel <= 0 ){
+            //when the fuel runs out 
             this.sprite.body.allowGravity = true;
             Jetman.Particles.stopJetpackParticleFlare();
             return false;
         }
+        this.fly();
+        return true;
+    },
+
+    fly: function(){
+        if(this.isOnJumpPadMomentum){
+            return;
+        }
+        this.disableFling = true;
+        this.isFlinging = false;
         Jetman.FuelGauge.sprite.setPointerPosition(false);
         this.enableAngleCorrection = false;
         Jetman.Player.sprite.body.allowGravity = false; 
@@ -72,20 +82,17 @@ Jetman.Player = {
         Jetman.Player.anglePlayerToPointer();
         Jetman.Particles.startJetpackParticleFlare();
         this.fuel--;
-        return true;
     },
 
     stop: function(){
         Jetman.Particles.stopJetpackParticleFlare();
         this.sprite.body.allowGravity = true;
-        if(this.fuel <= 0){
-            this.sprite.body.velocity.x = 0;
-        }   
+        this.disableFling = false;
     },
 
     applySuddenVelocity: function(xVelocity, yVelocity){
+        this.isFlinging = false;
         this.sprite.body.allowGravity = true;
-        this.sprite.body.maxVelocity.y = -yVelocity;
         this.sprite.body.velocity.y = yVelocity;
         this.sprite.body.velocity.x = xVelocity;
         this.isOnJumpPadMomentum = true;
@@ -99,21 +106,47 @@ Jetman.Player = {
       this.sprite.angle += 95;
     },
 
-    angleUpright: function() {
-        if(this.enableAngleCorrection && !this.isOnJumpPadMomentum){
-            if(this.sprite.body.rotation >= 2.5 || this.sprite.body.rotation <= -2.5){
-              if(this.sprite.body.rotation < 0){
-                this.sprite.body.rotation += 5;
-              } else {
-                this.sprite.body.rotation -= 5;
-              }  
-            } else {
-              this.enableAngleCorrection = false;
-            }
+    handleRotations: function() {
+        if(this.enableAngleCorrection ){ 
+            this.rotateToStandingPostion();
+            return
             
         }
 
-        this.handleJumpPadSpin();
+        if(this.isOnJumpPadMomentum){
+            this.handleJumpPadSpin();
+            return;
+
+        }
+
+        if(this.isFlinging){
+            this.handleFlingSpin();
+            return;
+        }
+        
+    },
+
+    rotateToStandingPostion: function(){
+        if(this.sprite.body.rotation >= 2.5 || this.sprite.body.rotation <= -2.5){
+          if(this.sprite.body.rotation < 0){
+            this.sprite.body.rotation += 5;
+          } else {
+            this.sprite.body.rotation -= 5;
+          }  
+        } else {
+            this.isFlinging = false;
+            this.enableAngleCorrection = false;
+            this.isOnJumpPadMomentum = false;
+        }
+    },
+
+    handleFlingSpin: function(){
+        if(this.isFlingingRight){
+            this.sprite.body.rotation += 8;
+        } else {
+            this.sprite.body.rotation -= 8;
+        }
+         
     },
 
     startAnglingUpright: function(){
@@ -121,13 +154,8 @@ Jetman.Player = {
     },
 
     handleJumpPadSpin: function(){
-        if(!this.isOnJumpPadMomentum){
-            return;
-        }
         this.sprite.body.rotation += 8;
-        if(this.sprite.body.velocity.y>=-20){
-            this.isOnJumpPadMomentum = false;
-            Jetman.Player.sprite.body.maxVelocity.y= this.flySpeed;
+        if(this.sprite.body.velocity.y>=-20){   
             this.startAnglingUpright();
         }       
     },
@@ -160,7 +188,8 @@ Jetman.Player = {
         }
         this.fuel += amount;
         Jetman.FuelGauge.sprite.setPointerPosition(true);
-    }    
+    }
+
 
 }
 
