@@ -16,6 +16,8 @@ Jetman.Platforms = {
             if (playerObj.body.blocked.down) {
                 Jetman.Player.resetCombo();
                 Jetman.Player.startAnglingUpright();
+                Jetman.Player.sprite.body.velocity.x = 0;
+                Jetman.Player.isFlinging = false;
             }   
         }else{
         //for death platforms
