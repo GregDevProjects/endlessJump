@@ -58,7 +58,7 @@ Jetman.Player = {
         );
         this.isFlinging = true;
         this.isFlingingRight = this.sprite.body.velocity.x > 0 ? true : false;
-
+        this.enableAngleCorrection = false;
         if(this.isOnJumpPadMomentum && this.fuel > 0){
             this.game.time.events.add(500, function(){
             Jetman.Player.isOnJumpPadMomentum = false;
@@ -70,7 +70,6 @@ Jetman.Player = {
     },
 
     flyToActivePointer: function(){
-          console.log(this.fuel);
         if(this.fuel <= 0 ){
             //when the fuel runs out 
             this.sprite.body.allowGravity = true;

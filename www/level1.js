@@ -14,7 +14,7 @@ Jetman.Level1.prototype = {
       Jetman.Platforms.initBackground(this.game);
       Jetman.Player.initPlayer(this.game);
 
-      Jetman.Player.fuel = 1000;
+      //Jetman.Player.fuel = 1000;
        
       Jetman.ExplosionEffect.init(this.game);
       Jetman.FuelGauge.init(this.game);
@@ -31,7 +31,7 @@ Jetman.Level1.prototype = {
 
 
       Jetman.Platforms.scrollBackground(this.game.camera);
-       Jetman.PoolSpawner.checkSpawn(this.game);
+      Jetman.PoolSpawner.checkSpawn(this.game);
 
       //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 
