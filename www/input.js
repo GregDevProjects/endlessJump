@@ -18,6 +18,7 @@ Jetman.Input = {
 		arguments[0].position.x += game.camera.x;
 		arguments[0].position.y += game.camera.y;
 
+		//get the angle between swipeStartPosition and arguments[0].position
 		var swipeAngle = Phaser.Math.wrapAngle(Phaser.Point.angle(swipeStartPosition, arguments[0].position), true);
 		var swipeDistance = Phaser.Point.distance(arguments[0].position, swipeStartPosition)
 		var angleDeg = (Math.atan2(swipeStartPosition.y - arguments[0].position.y, swipeStartPosition.x - arguments[0].position.x) * 180 / Math.PI) + 180;

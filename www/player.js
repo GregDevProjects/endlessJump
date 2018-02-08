@@ -70,7 +70,6 @@ Jetman.Player = {
     },
 
     flyToActivePointer: function(){
-          console.log(this.fuel);
         if(this.fuel <= 0 ){
             //when the fuel runs out 
             this.sprite.body.allowGravity = true;
