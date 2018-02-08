@@ -1,3 +1,4 @@
+//JUMPPAD VS ENEMY JUMPING 
 Jetman.Player = {
 
     MAX_FUEL: 400,
@@ -46,9 +47,10 @@ Jetman.Player = {
     },
 
     fling: function(angle, force){
-        if(this.isFlinging || this.isOnJumpPadMomentum){// || this.disableFling){
+        if(this.isFlinging){
            return;
         }
+
         this.game.physics.arcade.velocityFromAngle(
             angle,
             force,
@@ -56,6 +58,15 @@ Jetman.Player = {
         );
         this.isFlinging = true;
         this.isFlingingRight = this.sprite.body.velocity.x > 0 ? true : false;
+
+        if(this.isOnJumpPadMomentum && this.fuel > 0){
+            this.game.time.events.add(500, function(){
+            Jetman.Player.isOnJumpPadMomentum = false;
+            Jetman.Player.isFlinging = false;
+
+            });
+        }
+
     },
 
     flyToActivePointer: function(){
@@ -70,9 +81,11 @@ Jetman.Player = {
     },
 
     fly: function(){
+      
         if(this.isOnJumpPadMomentum){
             return;
         }
+
         this.disableFling = true;
         this.isFlinging = false;
         Jetman.FuelGauge.sprite.setPointerPosition(false);
@@ -113,14 +126,8 @@ Jetman.Player = {
             
         }
 
-        if(this.isOnJumpPadMomentum){
-            this.handleJumpPadSpin();
-            return;
-
-        }
-
-        if(this.isFlinging){
-            this.handleFlingSpin();
+        if(this.isOnJumpPadMomentum || this.isFlinging){
+            this.handleSpin();
             return;
         }
         
@@ -134,30 +141,36 @@ Jetman.Player = {
             this.sprite.body.rotation -= 5;
           }  
         } else {
-            this.isFlinging = false;
-            this.enableAngleCorrection = false;
+            //when jetman is upright
             this.isOnJumpPadMomentum = false;
+            this.enableAngleCorrection = false;
+            this.isFlinging = false;
+
         }
     },
 
-    handleFlingSpin: function(){
+    handleSpin: function(){
         if(this.isFlingingRight){
             this.sprite.body.rotation += 8;
         } else {
             this.sprite.body.rotation -= 8;
         }
-         
+    
     },
 
     startAnglingUpright: function(){
          this.enableAngleCorrection = true;
     },
 
-    handleJumpPadSpin: function(){
-        this.sprite.body.rotation += 8;
-        if(this.sprite.body.velocity.y>=-20){   
+    angleUprightConditions: function(){
+        if(this.isFlinging){
+            this.game.time.events.add(250, function(){
+                Jetman.Player.startAnglingUpright();
+            });
+           
+        } else {
             this.startAnglingUpright();
-        }       
+        }
     },
 
     incrementCombo: function(){

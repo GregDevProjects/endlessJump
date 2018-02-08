@@ -1,7 +1,8 @@
 Jetman.JumpPad = {
   VelocityChange : {
-    UP: {x: 0, y: 700},
-    UP_RIGHT: {x: 250, y: 700}
+    UP: {x: 0, y: 400},
+    UP_RIGHT: {x: 300, y: 400},
+    UP_LEFT: {x: 300, y: 400}
   },
 
 	init: function(map,game){
@@ -29,17 +30,24 @@ JumpPad = function(name, game, x, y) {
       this.anchor = {x:0.5, y:0.5};
     }
 
+    if(this.name === "upLeft"){
+      this.rotation = -45;
+      this.anchor = {x:0.5, y:0.5};
+    }
+
     this.animations.add('motion', null, 2, true);
     this.animations.play('motion');
 
     this.onPlayerOverlap = function(player, jumpPad){
       switch (jumpPad.name){
       case "up":
-      Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
-      break;
+        Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP.x,-Jetman.JumpPad.VelocityChange.UP.y);
+        break;
       case "upRight":
-      Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
-      break;
+        Jetman.Player.applySuddenVelocity(Jetman.JumpPad.VelocityChange.UP_RIGHT.x,-Jetman.JumpPad.VelocityChange.UP_RIGHT.y);
+        break;
+      case "upLeft":
+        Jetman.Player.applySuddenVelocity(-Jetman.JumpPad.VelocityChange.UP_LEFT.x,-Jetman.JumpPad.VelocityChange.UP_LEFT.y);
     }
   }
    game.add.existing(this);

@@ -14,13 +14,14 @@ Jetman.Level1.prototype = {
       Jetman.Platforms.initBackground(this.game);
       Jetman.Player.initPlayer(this.game);
 
-      Jetman.Player.fuel = 0;
+      //Jetman.Player.fuel = 1000;
        
       Jetman.ExplosionEffect.init(this.game);
       Jetman.FuelGauge.init(this.game);
+      Jetman.Input.initFlingOnDown(this.game);
 
 
-       Jetman.swipe = new Swipe(this.game);
+
 
 
 
@@ -42,7 +43,7 @@ Jetman.Level1.prototype = {
 
 
     render: function() {
-      this.game.debug.pointer(this.game.input.activePointer);
+      // this.game.debug.pointer(this.game.input.activePointer);
       this.game.debug.text(this.game.time.fps, 2, 14, "#00ff00");
       // this.game.debug.text("Fuel: " + Jetman.Player.fuel, 32,200);
      // this.game.debug.text("Max Combo: " + Jetman.Player.maxCombo, 32,150);
