@@ -31,7 +31,7 @@ Jetman.Level1.prototype = {
 
 
       Jetman.Platforms.scrollBackground(this.game.camera);
-       Jetman.PoolSpawner.checkSpawn(this.game);
+      Jetman.PoolSpawner.checkSpawn(this.game);
 
       //tile collisions 
       this.game.physics.arcade.collide(Jetman.Player.sprite, Jetman.Platforms.platforms, Jetman.Platforms.onPlatformLayerCollision, null, this); 

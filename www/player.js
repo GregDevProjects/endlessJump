@@ -58,7 +58,7 @@ Jetman.Player = {
         );
         this.isFlinging = true;
         this.isFlingingRight = this.sprite.body.velocity.x > 0 ? true : false;
-
+        this.enableAngleCorrection = false;
         if(this.isOnJumpPadMomentum && this.fuel > 0){
             this.game.time.events.add(500, function(){
             Jetman.Player.isOnJumpPadMomentum = false;
