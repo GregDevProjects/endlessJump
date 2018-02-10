@@ -1,62 +1,17 @@
-Jetman.SpikeEnemyTypes = {
-    RIGHT_TO_LEFT: 1,
-    LEFT_TO_RIGHT: 2,
-    FOLLOW: 3
-};
+SpikedEnemy = function(game, spikeEnemyType) {
 
-Jetman.SpikeEnemies = {
-    
-    init: function(map, game) {
-        this.enemyArr=[];
-
-            for (var i = 0; i < map.objects.spikeEnemy.length; i++) {
-                this.enemyArr.push(new SpikedEnemy(
-                    this.nameToEnum(map.objects.spikeEnemy[i].name),
-                    game,
-                    map.objects.spikeEnemy[i].x,
-                    map.objects.spikeEnemy[i].y
-                ));
-
-
-            }
-        },
-
-    //this is wierd 
-    nameToEnum: function(tileObjName) {
-        switch (tileObjName) {
-            case 'rightToLeft':
-                return 1;
-            case 'leftToRight':
-                return 2;
-            case 'follow':
-                return 3;
-        }
-    }
-
-
-};
-
-
-
-
-SpikedEnemy = function(spikeEnemyType, game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'spikeEnemy');
+    Phaser.Sprite.call(this, game, 0, 0, 'spikeEnemy');
     this.spikeEnemyType = spikeEnemyType;
     game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
-    this.moveSpeed = 100;
+    this.spikeEnemyType === Jetman.LeftToRightSpike.TYPE_ID ? this.moveSpeed = -100 : this.moveSpeed = 100;
     this.body.immovable = true;
 
     this.move = function() {
 
-        switch (this.spikeEnemyType) {
-            case Jetman.SpikeEnemyTypes.LEFT_TO_RIGHT:
-                this.moveBackAndForthBetweenBoundries();
-                return;
-            case Jetman.SpikeEnemyTypes.RIGHT_TO_LEFT:
-                this.moveBackAndForthBetweenBoundries();
-                return;
-            case Jetman.SpikeEnemyTypes.FOLLOW:
-                this.followPlayerAndRotateEye();
+        if(this.spikeEnemyType === Jetman.FollowSpike.TYPE_ID){
+            this.followPlayerAndRotateEye();
+        } else {
+            this.moveBackAndForthBetweenBoundries();
         }
 
     }
@@ -106,7 +61,7 @@ SpikedEnemy = function(spikeEnemyType, game, x, y) {
 
     this.init = function(game) {
         this.attachButton(game);
-        if (this.spikeEnemyType === Jetman.SpikeEnemyTypes.FOLLOW) {
+        if (this.spikeEnemyType === Jetman.FollowSpike.TYPE_ID) {
             this.attachEye(game);
         }
     }
@@ -154,3 +109,23 @@ SpikedEnemy.prototype.update = function() {
 
 
 }
+
+
+Jetman.RightToLeftSpike = {
+    TYPE_ID : 2,
+    QUANTITY : 3,
+    SPRITE : SpikedEnemy  
+}
+
+Jetman.LeftToRightSpike = {
+    TYPE_ID : 3,
+    QUANTITY : 3,
+    SPRITE : SpikedEnemy  
+}
+
+Jetman.FollowSpike = {
+    TYPE_ID : 4,
+    QUANTITY : 2,
+    SPRITE : SpikedEnemy
+}
+

@@ -9,7 +9,7 @@ Jetman.Level1.prototype = {
       Jetman.PoolSpawner.createObjects(this.game);
       Jetman.PoolSpawner.initSpawnPoints(Jetman.Platforms.map);
       //add this to pool spawner 
-      Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
+     // Jetman.JumpPad.init(Jetman.Platforms.map,this.game);   
 
       Jetman.Platforms.initBackground(this.game);
       Jetman.Player.initPlayer(this.game);
@@ -19,12 +19,6 @@ Jetman.Level1.prototype = {
       Jetman.ExplosionEffect.init(this.game);
       Jetman.FuelGauge.init(this.game);
       Jetman.Input.initFlingOnDown(this.game);
-
-
-
-
-
-
     },
 
     update: function() {

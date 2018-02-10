@@ -1,12 +1,5 @@
-Jetman.Walker = {
-    
-
-
-}
-
-
-Walker = function(game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'walker');
+Walker = function(game) {
+    Phaser.Sprite.call(this, game, 0, 0, 'walker');
     game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
     this.body.gravity.y = 1000;
     this.walkerMoveSpeed = 50;
@@ -65,4 +58,10 @@ Walker.prototype.update = function() {
     
     this.move();
 
+}
+
+Jetman.Walker = {
+    TYPE_ID : 1,
+    QUANTITY : 5,
+    SPRITE : Walker
 }
