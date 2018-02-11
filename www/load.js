@@ -23,7 +23,7 @@ Jetman.PreLoad.prototype = {
                 this.game.load.image('walker', 'img/walker.png');
 
                 this.game.load.image('jumper', 'img/jumper.png');
-
+                this.game.load.image('turret', 'img/turret.png');
       
                 this.game.load.image('caveTiles', 'img/platform_caves_all.png');
 
@@ -31,7 +31,12 @@ Jetman.PreLoad.prototype = {
 
                 this.game.load.spritesheet('fuelXl', 'img/xl.png', 50, 25, 4); 
                 this.game.load.spritesheet('fireball','img/fireBall.png',116.333,168,7);
-                
+
+                // this.game.load.spritesheet('bullet','img/bullet.png',33.333,48,7);
+
+                 this.game.load.image('bullet2','img/bullet2.png');
+              //   this.game.load.spritesheet('bullet3','img/bullet3.png',15,15,7);
+
                 this.game.load.tilemap('mapName', 'tilemaps/test3.json', null, Phaser.Tilemap.TILED_JSON);
 
                 this.game.load.spritesheet('kaboom', 'img/explosion.png', 96, 96);

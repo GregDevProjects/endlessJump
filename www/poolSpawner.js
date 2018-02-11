@@ -10,7 +10,8 @@ Jetman.PoolSpawner = {
             Jetman.RightToLeftSpike,
             Jetman.JumpPadUp,
             Jetman.JumpPadRight,
-            Jetman.JumpPadLeft
+            Jetman.JumpPadLeft,
+            Jetman.Turret
 
         ];
 
@@ -27,13 +28,6 @@ Jetman.PoolSpawner = {
                     //walkers
                     group.add(new anEnemy.SPRITE(this.game));
                 }
-
-                // if(anEnemy.TYPE_ID === 5){
-                //     //jump pads
-                //     group.add(new anEnemy.SPRITE(this.game, ));
-                // }
-                    
-                
                 
             }
 
@@ -109,7 +103,10 @@ Jetman.PoolSpawner = {
     reviveDeadAndMoveToSpawnPoint: function(spawnPoint, objToRevive){
         objToRevive.arrayIndex = spawnPoint.arrayIndex;
         objToRevive.revive(); 
-        objToRevive.button.revive();
+        if("button" in objToRevive){
+            objToRevive.button.revive();
+        }
+
         this.spawnPoints[spawnPoint.arrayIndex].spawned = true;       
     },
 

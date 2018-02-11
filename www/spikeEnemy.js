@@ -113,13 +113,13 @@ SpikedEnemy.prototype.update = function() {
 
 Jetman.RightToLeftSpike = {
     TYPE_ID : 2,
-    QUANTITY : 3,
+    QUANTITY : 4,
     SPRITE : SpikedEnemy  
 }
 
 Jetman.LeftToRightSpike = {
     TYPE_ID : 3,
-    QUANTITY : 3,
+    QUANTITY : 4,
     SPRITE : SpikedEnemy  
 }
 
